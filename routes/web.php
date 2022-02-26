@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Controllers\HomeController::class, 'show']);
+Route::get('/', fn() => redirect('/login'));
+
+Route::get('/login', [Controllers\LoginController::class, 'show'])->name('login');
+Route::post('/login', [Controllers\LoginController::class, 'login']);
+
+Route::get('/logout', [Controllers\LoginController::class, 'logout']);
+
+Route::get('/register', [Controllers\RegisterController::class, 'show']);
+Route::post('/register', [Controllers\RegisterController::class, 'register']);
+
+Route::get('/register/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/dashboard');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::get('/dashboard', [Controllers\DashboardController::class, 'show'])->middleware(['auth']);
