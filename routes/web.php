@@ -22,13 +22,5 @@ Route::post('/login', [Controllers\LoginController::class, 'login']);
 
 Route::get('/logout', [Controllers\LoginController::class, 'logout']);
 
-Route::get('/register', [Controllers\RegisterController::class, 'show']);
-Route::post('/register', [Controllers\RegisterController::class, 'register']);
-
-Route::get('/register/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-
-    return redirect('/dashboard');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-
-Route::get('/dashboard', [Controllers\DashboardController::class, 'show'])->middleware(['auth']);
+Route::get('/overview', [Controllers\OverviewController::class, 'show'])->middleware(['auth']);
+Route::get('/apps', [Controllers\AppsController::class, 'show'])->middleware(['auth']);

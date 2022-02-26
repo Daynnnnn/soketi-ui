@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class HomeController extends Controller
+class AppsController extends Controller
 {
     public function show()
     {
-        return Inertia::render('Home');
+        return Inertia::render('Apps');
     }
 }

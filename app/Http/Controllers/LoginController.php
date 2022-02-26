@@ -11,7 +11,7 @@ class LoginController extends Controller
     public function show()
     {
         if (!is_null(Auth::user())) {
-            return redirect('/dashboard');
+            return redirect('/overview');
         }
 
         return Inertia::render('Login');
@@ -22,7 +22,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect('/dashboard');
+            return redirect('/overview');
         }
 
         return Inertia::render('Login', [
