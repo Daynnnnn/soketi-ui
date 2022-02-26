@@ -14,10 +14,10 @@ module.exports = {
                 transform: 'rotate(2deg)'
             },
         }
-    },
-    animation: {
-        wiggle: 'wiggle .15s ease-in-out infinite',
-    }
+      },
+      animation: {
+          wiggle: 'wiggle .15s ease-in-out infinite',
+      }
     },
   },
   plugins: [],
