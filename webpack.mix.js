@@ -1,5 +1,7 @@
 const mix = require('laravel-mix');
 
+require('laravel-mix-svelte');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,7 +14,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .react()
+    .svelte()
     .postCss("resources/css/app.css", "public/css", [
         require("tailwindcss"),
     ]);

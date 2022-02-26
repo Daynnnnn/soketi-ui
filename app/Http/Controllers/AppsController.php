@@ -9,6 +9,6 @@ class AppsController extends Controller
 {
     public function show()
     {
-        return Inertia::render('Apps');
+        return Inertia::render('Dashboard/Apps');
     }
 }

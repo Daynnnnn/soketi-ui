@@ -9,6 +9,6 @@ class OverviewController extends Controller
 {
     public function show()
     {
-        return Inertia::render('Overview');
+        return Inertia::render('Dashboard/Overview');
     }
 }
