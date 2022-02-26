@@ -29,6 +29,7 @@
         "@inertiajs/progress": "^0.2.7",
         "laravel-mix-svelte": "^0.5.0",
         "svelte": "^3.46.4",
+        "svelte-icons": "^2.1.0",
         "svelte-loader": "^3.1.2"
     }
 }
