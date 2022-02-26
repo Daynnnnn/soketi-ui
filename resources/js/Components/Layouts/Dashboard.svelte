@@ -11,14 +11,14 @@
     ];
 
     let dropdownMenu = false;
-    let sidebarOpen = false;
+    let sidebarOpen = true;
 </script>
 
 <div>
     <div class="fixed inset-0 flex z-40 md:hidden" role="dialog" aria-modal="true">
-      <div class="transition-opacity ease-linear duration-300 {sidebarOpen ? "opacity-0" : "opacity-100"} fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
-      <div class="transition ease-in-out duration-300 transform {sidebarOpen ? "-translate-x-full" : "translate-x-0"} relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
-        <div class="ease-in-out duration-300 {sidebarOpen ? "opacity-0" : "opacity-100"} absolute top-0 right-0 -mr-12 pt-2">
+      <div class="transition-opacity ease-linear duration-300 {sidebarOpen ? "opacity-100" : "opacity-0"} fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
+      <div class="transition ease-in-out duration-300 transform {sidebarOpen ?  "translate-x-0" : "-translate-x-full"} relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
+        <div class="ease-in-out duration-300 {sidebarOpen ? "opacity-100" : "opacity-0"} absolute top-0 right-0 -mr-12 pt-2">
           <button on:click={() => sidebarOpen = !sidebarOpen} type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             <span class="sr-only">Close sidebar</span>
             <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
