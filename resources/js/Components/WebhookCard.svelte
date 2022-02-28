@@ -4,13 +4,17 @@
 
     export let webhook;
 
+    let type = (typeof webhook.url != 'undefined') ? 'url' : 'lambda';
+
     let fieldMap = {
         lambda: {
-            target: "Lambda Function ARN",
+            title: "Lambda Function ARN",
+            key: 'lambda_function',
             icon: LambdaIcon,
         },
         url: {
-            target: "Webhook URL",
+            title: "Webhook URL",
+            key: 'url',
             icon: HookIcon,
         },
     };
@@ -18,12 +22,12 @@
 
 <div class="w-full relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
     <div class="h-12 pr-3 flex items-center border-r-2 border-gray-200">
-        <svelte:component this={fieldMap[webhook.type]['icon']}/>
+        <svelte:component this={fieldMap[type]['icon']}/>
     </div>
     <div class="grow">
         <h1 class="font-semibold">
-            {fieldMap[webhook.type]['target']}
+            {fieldMap[type]['title']}
         </h1>
-        {webhook.target}
+        {webhook[fieldMap[type]['key']]}
     </div>
 </div>

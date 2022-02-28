@@ -6,7 +6,7 @@
     export let id;
 
     const navItems = [
-        {id: "overview", title: "Overview", path: "/overview", icon: OverviewIcon},
+        // {id: "overview", title: "Overview", path: "/overview", icon: OverviewIcon},
         {id: "apps", title: "Apps", path: "/apps", icon: AppsIcon},
     ];
 

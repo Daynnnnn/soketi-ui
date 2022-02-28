@@ -2,11 +2,7 @@
     import AppCard from "../../../Components/AppCard.svelte"
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
 
-    let apps = [
-        {id: '1', title: "Kwizzbit - QA", enabled: true, client_events: true, max_connections: 2000, webhook_count: 2},
-        {id: '2', title: "Kwizzbit - Production", enabled: true, client_events: false, max_connections: 100000, webhook_count: 1}
-    ];
-
+    export let apps;
 </script>
 
 <Dashboard id="apps">

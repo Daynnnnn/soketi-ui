@@ -5,13 +5,15 @@
     export let label;
     export let placeholder;
 
+    if (input !== 0 && input !== null) active = true;
+
     function toggleActive() {
         active = !active;
-        if (!active) input = '';
+        if (active == false) input = 0;
     }
 </script>
 
-<div>
+<div class="text-left">
     <p class="text-lg font-semibold">{label}</p>
     <div class="flex items-center border rounded-lg">
         <div on:click={toggleActive} class="cursor-pointer p-4 border-r-2 border-gray-100">
@@ -21,7 +23,11 @@
             </button>
         </div>
         <div class="grow text-xl">
-            <input bind:value={input} disabled={!active} placeholder="{placeholder}" id="input" class="appearance-none block w-full px-3 py-4 border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg" />
+            {#if active}
+            <input bind:value={input} id="input" class="appearance-none block w-full px-3 py-4 border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg" />
+            {:else}
+            <input value="{placeholder}" disabled class="appearance-none block w-full px-3 py-4 border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-lg" />
+            {/if}
         </div>
     </div>
 </div>

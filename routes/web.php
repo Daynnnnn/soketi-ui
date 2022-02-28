@@ -22,7 +22,7 @@ Route::post('/login', [Controllers\LoginController::class, 'login']);
 
 Route::get('/logout', [Controllers\LoginController::class, 'logout']);
 
-Route::get('/overview', [Controllers\OverviewController::class, 'show'])->middleware(['auth']);
-
 Route::get('/apps', [Controllers\AppsController::class, 'index'])->middleware(['auth']);
 Route::get('/apps/{id}', [Controllers\AppsController::class, 'show'])->middleware(['auth']);
+Route::post('/apps/{id}/regenerate-credentials', [Controllers\AppsController::class, 'regenerateCredentials'])->middleware(['auth']);
+Route::post('/apps/{id}/save', [Controllers\AppsController::class, 'save'])->middleware(['auth']);

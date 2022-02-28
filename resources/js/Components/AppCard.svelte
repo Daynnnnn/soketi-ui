@@ -16,13 +16,13 @@
     <div class="flex items-center w-2/3 text-center divide-x">
         <div class="w-1/3">
             <h1 class="font-bold">Client Events</h1>
-            <div class="{app.client_events ? "text-green-400" : "text-red-400"} mx-auto w-8 h-8">
+            <div class="{app.enable_client_messages ? "text-green-400" : "text-red-400"} mx-auto w-8 h-8">
                 <Dot />
             </div>
         </div>
         <div class="w-1/3">
             <h1 class="font-bold">Max Connections</h1>
-            <p>{app.max_connections}</p>
+            <p>{app.max_connections == 0 ? "∞" : app.max_connections}</p>
         </div>
         <div class="w-1/3">
             <h1 class="font-bold">Webhooks</h1>
