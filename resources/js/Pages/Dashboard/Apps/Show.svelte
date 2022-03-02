@@ -37,7 +37,7 @@
             <div class="w-2/3 grid grid-cols-1 lg:grid-cols-2 gap-x-4 lg:gap-y-16">
                 <div>
                     <p class="text-lg font-semibold">App Enabled</p>
-                    <div class="rounded-lg border border-gray-100">
+                    <div class="rounded-lg border bg-gray-50 border-gray-100">
                         <div class="text-center py-4">
                             <Toggle bind:active={app.enabled} />
                         </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div>
                     <p class="text-lg font-semibold">Client Events</p>
-                    <div class="rounded-lg border border-gray-100">
+                    <div class="rounded-lg border bg-gray-50 border-gray-100">
                         <div class="text-center py-4">
                             <Toggle bind:active={app.enableClientMessages} />
                         </div>
