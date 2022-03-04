@@ -3,6 +3,7 @@
 
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
     import AddButton from "../../../Components/Inputs/AddButton.svelte"
+    import Button from "../../../Components/Inputs/Button.svelte"
     import TextWithToggle from "../../../Components/Inputs/TextWithToggle.svelte"
     import Toggle from "../../../Components/Inputs/Toggle.svelte"
     import WebhookCard from "../../../Components/WebhookCard.svelte"
@@ -10,10 +11,6 @@
     export let app;
 
     $: console.log(app)
-
-    function save() {
-        Inertia.post('/apps/' + app.appId + '/save', app);
-    }
 
     function regenerateCredentials() {
         Inertia.post('/apps/' + app.appId + '/regenerate-credentials');
@@ -27,7 +24,7 @@
         </div>
         <div class="flex grow">
             <div class="ml-auto">
-                <button on:click={save} type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                <Button label="Save" endpoint="/apps/{app.appId}/save" data="{app}" />
             </div>
        </div>
     </div>
