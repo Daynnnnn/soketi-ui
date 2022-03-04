@@ -6,7 +6,7 @@
     let isActive = false;
 </script>
 
-<a href="/apps/{app.id}" class="cursor-pointer w-full relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+<a href="/apps/{app.id}" class="cursor-pointer w-full relative rounded-lg border border-gray-300 px-6 py-5 shadow-sm flex items-center space-x-3 transition duration-200 hover:bg-gray-50 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
     <div class="w-1/3 flex items-center">
         <div class="{app.enabled ? "text-green-400" : "text-red-400"} w-8 h-8 mr-4">
             <Dot />
