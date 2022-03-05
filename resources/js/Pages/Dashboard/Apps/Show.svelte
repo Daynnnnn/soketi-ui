@@ -54,23 +54,25 @@
                 <TextWithToggle label="Max Read Requests / Second" defaultValue="0" placeholder="∞" bind:input={app.maxReadRequestsPerSecond} />
             </div>
             <div class="grow mx-auto rounded-lg bg-white shadow-lg border border-gray-100">
-                <div on:click={regenerateCredentials} class="cursor-pointer transition duration-200 text-center hover:bg-gray-50 active:bg-gray-100 border-b-2 border-gray-100 py-2">
-                    Regenerate Keys
+                <div on:click={regenerateCredentials} class="h-1/10 cursor-pointer transition duration-200 text-center hover:bg-gray-50 active:bg-gray-100 border-b-2 border-gray-100 py-2">
+                    <div class="my-auto">
+                        Regenerate Keys
+                    </div>
                 </div>
-                <dl>
-                <div class="flex flex-col border-b border-gray-100 p-6 text-center">
+                <div class="h-9/10">
+                <div class="h-1/3 flex flex-col border-b border-gray-100 p-6 text-center">
                     <dd class="order-1 text-2xl font-extrabold text-indigo-600">App ID</dd>
                     <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">{app.appId}</dt>
                 </div>
-                <div class="flex flex-col border-t border-b border-gray-100 p-6 text-center">
+                <div class="h-1/3 flex flex-col border-t border-b border-gray-100 p-6 text-center">
                     <dd class="order-1 text-2xl font-extrabold text-indigo-600">App Key</dd>
                     <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">{app.appKey}</dt>
                 </div>
-                <div class="flex flex-col border-t border-gray-100 p-6 text-center">
+                <div class="h-1/3 flex flex-col border-t border-gray-100 p-6 text-center">
                     <dd class="order-1 text-2xl font-extrabold text-indigo-600">App Secret</dd>
                     <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">{app.appSecret}</dt>
                 </div>
-                </dl>
+                </div>
             </div>
         </div>
 
