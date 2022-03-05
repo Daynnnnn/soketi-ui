@@ -37,7 +37,7 @@ class App
         return $this;
     }
 
-    public static function makeFromModel($model)
+    public static function makeFromModel($model): self
     {
         return (new self)
             ->set('title', $model->title)
