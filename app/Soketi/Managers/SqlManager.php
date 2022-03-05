@@ -11,13 +11,7 @@ class SqlManager implements ManagerContract
 {
     public function all(): Collection
     {
-        $collection = new Collection();
-
-        foreach (SqlApp::get() as $app) {
-            $collection->push(App::makeFromModel($app));
-        }
-
-        return $collection;
+        return SqlApp::get()->map(fn($app) => App::makeFromModel($app));
     }
 
     public function find($id): App
