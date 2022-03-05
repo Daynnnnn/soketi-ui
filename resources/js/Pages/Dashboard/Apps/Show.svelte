@@ -74,12 +74,6 @@
             </div>
         </div>
 
-        <div class="mt-6 flex">
-            <div class="w-full grid grid-cols-4 gap-2">
-
-            </div>
-            </div>
-
         <div class="flex items-center pt-8 pb-2">
             <div class="pr-1">
                 <AddButton />
