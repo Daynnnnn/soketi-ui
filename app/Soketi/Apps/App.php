@@ -70,18 +70,6 @@ class App
         ];
     }
 
-    public function toFrontendArray(): array
-    {
-        $array = $this->toArray();
-
-        return array_merge($array, [
-            'maxConnections' => $this->maxConnections != 0 ? : null,
-            'maxBackendEventsPerSecond' => $this->maxBackendEventsPerSecond != 0 ? $this->maxBackendEventsPerSecond : null,
-            'maxClientEventsPerSecond' => $this->maxClientEventsPerSecond != 0 ? $this->maxClientEventsPerSecond : null,
-            'maxReadRequestsPerSecond' => $this->maxReadRequestsPerSecond != 0 ? $this->maxReadRequestsPerSecond : null,
-        ]);
-    }
-
     public function regenerateCredentials(): self
     {
         $this->appKey = strtolower(Str::random(20));
