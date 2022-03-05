@@ -32,7 +32,7 @@ class SqlManager implements ManagerContract
 
     public function delete($id): void
     {
-
+        $this->appToModel($app)->delete();
     }
 
     protected function appToModel(App $app): SqlApp
