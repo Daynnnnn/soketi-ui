@@ -2,15 +2,8 @@
     import { Inertia } from '@inertiajs/inertia'
 
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
-    import AddButton from "../../../Components/Inputs/AddButton.svelte"
-    import Button from "../../../Components/Inputs/Button.svelte"
-    import TextWithToggle from "../../../Components/Inputs/TextWithToggle.svelte"
-    import Toggle from "../../../Components/Inputs/Toggle.svelte"
-    import WebhookCard from "../../../Components/WebhookCard.svelte"
 
     export let app;
-
-    $: console.log(app)
 
     function regenerateCredentials() {
         Inertia.post('/apps/' + app.appId + '/regenerate-credentials');
