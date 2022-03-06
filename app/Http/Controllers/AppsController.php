@@ -44,6 +44,15 @@ class AppsController extends Controller
         ]);
     }
 
+    public function webhooks($id)
+    {
+        $app = Manager::find($id);
+
+        return Inertia::render('Dashboard/Apps/Webhooks', [
+            'app' => $app->toArray(),
+        ]);
+    }
+
     public function save($id)
     {
         $app = Manager::find($id);
