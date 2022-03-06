@@ -42,6 +42,13 @@ class SqlManager implements ManagerContract
         $model->max_backend_events_per_sec = $app->get('maxBackendEventsPerSecond');
         $model->max_client_events_per_sec = $app->get('maxClientEventsPerSecond');
         $model->max_read_req_per_sec = $app->get('maxReadRequestsPerSecond');
+        $model->max_presence_members_per_channel = $app->get('maxPresenceMembersPerChannel');
+        $model->max_presence_member_size_in_kb = $app->get('maxPresenceMemberSize');
+        $model->max_channel_name_length = $app->get('maxChannelNameLength');
+        $model->max_event_channels_at_once = $app->get('maxSimultaneousEventChannels');
+        $model->max_event_name_length = $app->get('maxEventNameLength');
+        $model->max_event_payload_in_kb = $app->get('maxEventPayloadSize');
+        $model->max_event_batch_size = $app->get('maxEventBatchSize');
         $model->webhooks = json_encode($app->get('webhooks'));
 
         return $model;

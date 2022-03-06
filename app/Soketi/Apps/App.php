@@ -50,6 +50,13 @@ class App
             ->set('maxBackendEventsPerSecond', $model->max_backend_events_per_sec)
             ->set('maxClientEventsPerSecond', $model->max_client_events_per_sec)
             ->set('maxReadRequestsPerSecond', $model->max_read_req_per_sec)
+            ->set('maxPresenceMembersPerChannel', $model->max_presence_members_per_channel)
+            ->set('maxPresenceMemberSize', $model->max_presence_member_size_in_kb)
+            ->set('maxChannelNameLength', $model->max_channel_name_length)
+            ->set('maxSimultaneousEventChannels', $model->max_event_channels_at_once)
+            ->set('maxEventNameLength', $model->max_event_name_length)
+            ->set('maxEventPayloadSize', $model->max_event_payload_in_kb)
+            ->set('maxEventBatchSize', $model->max_event_batch_size)
             ->set('webhooks', json_decode($model->webhooks));
     }
 
@@ -66,6 +73,13 @@ class App
             'maxBackendEventsPerSecond' => $this->maxBackendEventsPerSecond,
             'maxClientEventsPerSecond' => $this->maxClientEventsPerSecond,
             'maxReadRequestsPerSecond' => $this->maxReadRequestsPerSecond,
+            'maxPresenceMembersPerChannel' => $this->maxPresenceMembersPerChannel,
+            'maxPresenceMemberSize' => $this->maxPresenceMemberSize,
+            'maxChannelNameLength' => $this->maxChannelNameLength,
+            'maxSimultaneousEventChannels' => $this->maxSimultaneousEventChannels,
+            'maxEventNameLength' =>  $this->maxEventNameLength,
+            'maxEventPayloadSize' => $this->maxEventPayloadSize,
+            'maxEventBatchSize' => $this->maxEventBatchSize,
             'webhooks' => $this->webhooks,
         ];
     }

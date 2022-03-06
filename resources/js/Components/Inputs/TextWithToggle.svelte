@@ -1,15 +1,16 @@
 <script>
     let active = false;
 
+    export let defaultValue;
     export let input;
     export let label;
     export let placeholder;
 
-    if (input !== 0 && input !== null) active = true;
+    if (input != defaultValue) active = true;
 
     function toggleActive() {
         active = !active;
-        if (active == false) input = 0;
+        input = defaultValue;
     }
 </script>
 
