@@ -26,11 +26,20 @@ class AppsController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function credentials($id)
     {
         $app = Manager::find($id);
 
-        return Inertia::render('Dashboard/Apps/Show', [
+        return Inertia::render('Dashboard/Apps/Credentials', [
+            'app' => $app->toArray(),
+        ]);
+    }
+
+    public function limits($id)
+    {
+        $app = Manager::find($id);
+
+        return Inertia::render('Dashboard/Apps/Limits', [
             'app' => $app->toArray(),
         ]);
     }
@@ -45,7 +54,7 @@ class AppsController extends Controller
 
         $app->save();
 
-        return redirect("/apps/$id");
+        return redirect(url()->previous());
     }
 
     public function regenerateCredentials($id)
@@ -54,6 +63,6 @@ class AppsController extends Controller
 
         $app->regenerateCredentials()->save();
 
-        return redirect("/apps/$id");
+        return redirect(url()->previous());
     }
 }

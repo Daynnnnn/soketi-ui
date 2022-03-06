@@ -1,14 +1,24 @@
 <script>
     import AppsIcon from 'svelte-icons/io/IoIosApps.svelte'
     import MoreIcon from 'svelte-icons/md/MdMoreVert.svelte'
-    import OverviewIcon from 'svelte-icons/go/GoTelescope.svelte'
+    import BackArrow from 'svelte-icons/io/IoMdArrowRoundBack.svelte'
+    import Padlock from 'svelte-icons/md/MdLock.svelte'
+    import Limits from 'svelte-icons/fa/FaSlidersH.svelte'
 
-    export let id;
+    export let page;
+    export let items;
+    export let appId;
 
-    const navItems = [
-        // {id: "overview", title: "Overview", path: "/overview", icon: OverviewIcon},
+    const navItems = {
+      default: [
         {id: "apps", title: "Apps", path: "/apps", icon: AppsIcon},
-    ];
+      ],
+      apps: [
+        {id: "back", title: "Back To Apps", path: "/apps", icon: BackArrow},
+        {id: "credentials", title: "Credentials", path: "/apps/"+appId+"/credentials", icon: Padlock},
+        {id: "limits", title: "Limits", path: "/apps/"+appId+"/limits", icon: Limits},
+      ],
+    };
 
     let dropdownMenu = false;
     let sidebarOpen = true;
@@ -32,9 +42,9 @@
         </div>
         <div class="mt-5 flex-1 h-0 overflow-y-auto">
           <nav class="px-2 space-y-1">
-            {#each navItems as navItem}
-            <a href="{navItem.path}" class="{id == navItem.id ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"} group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                <div class="{id == navItem.id ? "text-gray-500" : "text-gray-400 group-hover:text-gray-500"} text-gray-500 mr-4 flex-shrink-0 h-6 w-6">
+            {#each navItems[items] as navItem}
+            <a href="{navItem.path}" class="{page == navItem.id ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"} group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                <div class="{page == navItem.id ? "text-gray-500" : "text-gray-400 group-hover:text-gray-500"} text-gray-500 mr-4 flex-shrink-0 h-6 w-6">
                     <svelte:component this={navItem.icon}/>
                 </div>
                 {navItem.title}
@@ -54,9 +64,9 @@
         </div>
         <div class="mt-5 flex-grow flex flex-col">
           <nav class="flex-1 px-2 pb-4 space-y-1">
-            {#each navItems as navItem}
-            <a href="{navItem.path}" class="{id == navItem.id ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-              <div class="{id == navItem.id ? "text-gray-500" : "text-gray-400 group-hover:text-gray-500"} mr-3 flex-shrink-0 h-8 w-8" >
+            {#each navItems[items] as navItem}
+            <a href="{navItem.path}" class="{page == navItem.id ? "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+              <div class="{page == navItem.id ? "text-gray-500" : "text-gray-400 group-hover:text-gray-500"} mr-3 flex-shrink-0 h-8 w-8" >
                 <svelte:component this={navItem.icon}/>
               </div>
               {navItem.title}
