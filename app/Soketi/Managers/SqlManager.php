@@ -32,7 +32,7 @@ class SqlManager implements ManagerContract
     protected function appToModel(App $app): SqlApp
     {
         $model = SqlApp::find($app->get('appId')) ?? new SqlApp;
-        $model->title = $app->get('title');
+        // $model->title = $app->get('title');
         $model->id = $app->get('appId');
         $model->key = $app->get('appKey');
         $model->secret = $app->get('appSecret');

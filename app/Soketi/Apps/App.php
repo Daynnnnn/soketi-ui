@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class App
 {
-    protected $title;
+    // protected $title;
     protected $appId;
     protected $appKey;
     protected $appSecret;
@@ -40,7 +40,7 @@ class App
     public static function makeFromModel($model): self
     {
         return (new self)
-            ->set('title', $model->title)
+            // ->set('title', $model->title)
             ->set('appId', $model->id)
             ->set('appKey', $model->key)
             ->set('appSecret', $model->secret)
@@ -56,7 +56,7 @@ class App
     public function toArray(): array
     {
         return [
-            'title' => $this->title,
+            // 'title' => $this->title,
             'appId' => $this->appId,
             'appKey' => $this->appKey,
             'appSecret' => $this->appSecret,
