@@ -4,6 +4,8 @@
     import WebhookCard from "../../../Components/WebhookCard.svelte"
 
     export let app;
+
+    $: console.log(app);
 </script>
 
 <Dashboard items="apps" page="webhooks" appId={app.appId}>
@@ -19,9 +21,9 @@
     </div>
 
     <div class="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-1 gap-2">
-            {#each app.webhooks as webhook}
-                <WebhookCard {webhook} />
+        <div class="grid lg:grid-cols-2 gap-2">
+            {#each app.webhooks as _, i}
+                <WebhookCard bind:webhook={app.webhooks[i]} />
             {/each}
         </div>
     </div>
