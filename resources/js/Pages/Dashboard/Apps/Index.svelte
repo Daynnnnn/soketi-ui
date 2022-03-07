@@ -1,5 +1,5 @@
 <script>
-    import AppCard from "../../../Components/AppCard.svelte"
+    import AppCard from "../../../Components/Cards/AppCard.svelte"
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
 
     export let apps;

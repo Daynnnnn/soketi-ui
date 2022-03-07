@@ -1,7 +1,7 @@
 <script>
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
     import Button from "../../../Components/Inputs/Button.svelte"
-    import WebhookCard from "../../../Components/WebhookCard.svelte"
+    import WebhookCard from "../../../Components/Cards/WebhookCard.svelte"
 
     export let app;
 
@@ -21,7 +21,7 @@
     </div>
 
     <div class="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-2">
+        <div class="grid lg:grid-cols-1 gap-4">
             {#each app.webhooks as _, i}
                 <WebhookCard bind:webhook={app.webhooks[i]} />
             {/each}

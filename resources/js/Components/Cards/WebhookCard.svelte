@@ -1,8 +1,8 @@
 <script>
-    import Text from "../Components/Inputs/Text.svelte"
+    import Text from "../Inputs/Text.svelte"
     import Select from 'svelte-select';
     import HookIcon from 'svelte-icons/gi/GiMeatHook.svelte'
-    import LambdaIcon from '../Icons/Lambda.svelte'
+    import LambdaIcon from '../../Icons/Lambda.svelte'
 
     export let webhook;
 
@@ -63,12 +63,12 @@
     </div>
     </div>
     <div class="w-full flex space-x-2 pt-2">
-    <div class="{type == 'lambda' ? 'w-3/4' : 'w-full'}">
+    <div class="{type == 'lambda' ? 'w-5/6' : 'w-full'}">
         <h1 class="font-semibold">Events</h1>
         <Select on:select={handleEventsSelect} isMulti={true} items={events} value={getEvents()}></Select>
     </div>
     {#if type == 'lambda'}
-    <div class="w-1/4">
+    <div class="w-1/6">
         <h1 class="font-semibold">AWS Region</h1>
         <Select on:select={handleRegionSelect} items={awsRegions} value={webhook.region}></Select>
     </div>
