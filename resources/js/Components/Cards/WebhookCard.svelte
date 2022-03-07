@@ -42,6 +42,7 @@
     }
 
     function getEvents() {
+        if (webhook.events == null) return;
         return events.filter(event => webhook.events.includes(event.value));
     }
 
