@@ -3,6 +3,7 @@
     import Select from 'svelte-select';
     import HookIcon from 'svelte-icons/gi/GiMeatHook.svelte'
     import LambdaIcon from '../../Icons/Lambda.svelte'
+    import Delete from 'svelte-icons/io/IoMdCloseCircleOutline.svelte'
 
     export let webhook;
 
@@ -49,15 +50,23 @@
     let type = (typeof webhook.url != 'undefined') ? 'url' : 'lambda';
 </script>
 
+{#if webhook !== null}
 <div class="w-full relative rounded-lg border border-gray-300 bg-white px-6 py-3 shadow-sm items-center space-y-2 divide-y-2 transition duration-200 hover:border-gray-400 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
     <div class="flex items-center space-x-2">
     <div class="h-12 pr-2 flex items-center border-r-2 border-gray-200">
         <svelte:component this={fieldMap[type]['icon']}/>
     </div>
     <div class="grow">
-        <h1 class="font-semibold pl-1">
-            {fieldMap[type]['title']}
-        </h1>
+        <div class="flex items-center">
+            <h1 class="font-semibold pl-1">
+                {fieldMap[type]['title']}
+            </h1>
+            <div class="grow">
+                <div on:click={() => webhook = null} class="transition duration-200 ml-auto w-8 h-8 cursor-pointer pb-2 hover:text-indigo-500">
+                <Delete />
+                </div>
+            </div>
+        </div>
         <div class="w-full">
             <Text bind:input={webhook[fieldMap[type]['key']]} />
         </div>
@@ -76,3 +85,4 @@
     {/if}
     </div>
 </div>
+{/if}

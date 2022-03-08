@@ -1,16 +1,20 @@
 <script>
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
     import Button from "../../../Components/Inputs/Button.svelte"
+    import AddButton from "../../../Components/Inputs/AddButton.svelte"
     import WebhookCard from "../../../Components/Cards/WebhookCard.svelte"
 
     export let app;
 
-    $: console.log(app);
+    $: app.webhooks = app.webhooks.filter((webhook) => webhook !== null);
 </script>
 
 <Dashboard items="apps" page="webhooks" appId={app.appId}>
     <div class="max-w-7xl flex items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
-        <div>
+        <div class="flex items-center ">
+            <div on:click={() => app.webhooks = [...app.webhooks, {}]} class="pr-1">
+                <AddButton />
+            </div>
             <h1 class="text-2xl font-semibold text-gray-900">{app.title}</h1>
         </div>
         <div class="flex grow">
