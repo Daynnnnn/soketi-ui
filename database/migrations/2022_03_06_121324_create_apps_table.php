@@ -31,6 +31,7 @@ class CreateAppsTable extends Migration
             $table->integer('max_event_payload_in_kb')->nullable();
             $table->integer('max_event_batch_size')->nullable();
             $table->json('webhooks')->nullable();
+            $table->json('soketi_ui_settings')->nullable();
             $table->primary('id');
         });
     }

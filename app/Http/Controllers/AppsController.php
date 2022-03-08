@@ -13,7 +13,7 @@ class AppsController extends Controller
         $apps = Manager::all()->map(function ($app) {
             return [
                 'id' => $app->get('appId'),
-                // 'title' => $app->get('title'),
+                'title' => $app->get('title'),
                 'enabled' => $app->get('enabled'),
                 'enable_client_messages' => $app->get('enableClientMessages'),
                 'max_connections' => $app->get('maxConnections'),
