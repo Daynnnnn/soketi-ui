@@ -9,6 +9,10 @@
     $: app.webhooks = app.webhooks.filter((webhook) => webhook !== null);
 </script>
 
+<svelte:head>
+  <title>Webhooks - {app.title} | Soketi UI</title>
+</svelte:head>
+
 <Dashboard items="apps" page="webhooks" appId={app.appId}>
     <div class="max-w-7xl flex items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
         <div class="flex items-center ">

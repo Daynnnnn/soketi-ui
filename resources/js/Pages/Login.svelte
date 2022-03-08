@@ -23,6 +23,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Login | Soketi UI</title>
+</svelte:head>
+
 <div class="{isShaking ? 'animate-wiggle ' : ''}h-screen flex flex-col justify-center mx-auto py-12 sm:px-6 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-md ">
     <div class="h-24 w-24 mx-auto">

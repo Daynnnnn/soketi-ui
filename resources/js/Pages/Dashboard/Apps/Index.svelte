@@ -5,6 +5,10 @@
     export let apps;
 </script>
 
+<svelte:head>
+  <title>Apps | Soketi UI</title>
+</svelte:head>
+
 <Dashboard items="default" page="apps" >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pb-4">
         <h1 class="text-2xl font-semibold text-gray-900">Apps</h1>

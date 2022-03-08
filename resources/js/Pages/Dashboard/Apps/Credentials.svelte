@@ -10,6 +10,10 @@
     }
 </script>
 
+<svelte:head>
+  <title>Credentials - {app.title} | Soketi UI</title>
+</svelte:head>
+
 <Dashboard items="apps" page="credentials" appId={app.appId}>
     <div class="max-w-7xl flex items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
         <div>
