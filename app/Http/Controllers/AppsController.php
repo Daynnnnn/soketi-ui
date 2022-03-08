@@ -53,6 +53,15 @@ class AppsController extends Controller
         ]);
     }
 
+    public function debug($id)
+    {
+        $app = Manager::find($id);
+
+        return Inertia::render('Dashboard/Apps/Debug', [
+            'app' => $app->toArray(),
+        ]);
+    }
+
     public function save($id)
     {
         $app = Manager::find($id);

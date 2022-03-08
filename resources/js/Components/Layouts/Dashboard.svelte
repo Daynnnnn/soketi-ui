@@ -5,6 +5,7 @@
     import Padlock from 'svelte-icons/md/MdLock.svelte'
     import Limits from 'svelte-icons/fa/FaSlidersH.svelte'
     import HookIcon from 'svelte-icons/gi/GiMeatHook.svelte'
+    import DebugIcon from 'svelte-icons/md/MdBugReport.svelte'
 
     export let page;
     export let items;
@@ -19,6 +20,7 @@
         {id: "credentials", title: "Credentials", path: "/apps/"+appId+"/credentials", icon: Padlock},
         {id: "limits", title: "Limits", path: "/apps/"+appId+"/limits", icon: Limits},
         {id: "webhooks", title: "Webhooks", path: "/apps/"+appId+"/webhooks", icon: HookIcon},
+        {id: "debug", title: "Debug", path: "/apps/"+appId+"/debug", icon: DebugIcon},
       ],
     };
 
