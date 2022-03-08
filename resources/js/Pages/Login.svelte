@@ -24,8 +24,11 @@
 </script>
 
 <div class="{isShaking ? 'animate-wiggle ' : ''}h-screen flex flex-col justify-center mx-auto py-12 sm:px-6 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Soketi UI</h2>
+  <div class="sm:mx-auto sm:w-full sm:max-w-md ">
+    <div class="h-24 w-24 mx-auto">
+      <img alt="Soketi Logo" src="/logo.png" />
+    </div>
+    <h2 class="mt-2 text-center text-3xl font-extrabold text-gray-900">Soketi UI</h2>
   </div>
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md space-y-4">
