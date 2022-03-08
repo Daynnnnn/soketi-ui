@@ -1,12 +1,15 @@
 <script>
-    import { Inertia } from '@inertiajs/inertia'
-
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
+    import AlertModal from "../../../Components/Inputs/AlertModal.svelte"
 
     export let app;
 
-    function regenerateCredentials() {
-        Inertia.post('/apps/' + app.appId + '/regenerate-credentials');
+    let regenerateModal = false;
+
+    let regenModelText = {
+        heading: 'Regenerate Credentials',
+        body: 'Are you sure you want to regenerate the credentails for this app? This will break anything using the existing keys...',
+        button: 'Regenerate'
     }
 </script>
 
@@ -15,6 +18,7 @@
 </svelte:head>
 
 <Dashboard items="apps" page="credentials" appId={app.appId}>
+    <AlertModal endpoint={'/apps/' + app.appId + '/regenerate-credentials'} text={regenModelText} bind:modalOpen={regenerateModal} />
     <div class="max-w-7xl flex items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
         <div>
             <h1 class="text-2xl font-semibold text-gray-900">{app.title}</h1>
@@ -23,7 +27,7 @@
 
     <div class="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="grow mx-auto rounded-lg bg-white shadow-lg border border-gray-100">
-            <div on:click={regenerateCredentials} class="h-1/10 cursor-pointer transition duration-200 text-center hover:bg-gray-50 active:bg-gray-100 border-b-2 border-gray-100 py-2">
+            <div on:click={() => regenerateModal = true} class="h-1/10 cursor-pointer transition duration-200 text-center hover:bg-gray-50 active:bg-gray-100 border-b-2 border-gray-100 py-2">
                     <div class="my-auto">
                         Regenerate Keys
                     </div>
