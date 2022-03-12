@@ -27,21 +27,4 @@ class DebugEvent extends Model
         'user_id',
         'pusher_created_at',
     ];
-
-    protected $map = [
-        'event_types' => [
-            'client_event' => 'Client Event',
-            'member_added' => 'Member Added',
-            'member_removed' => 'Member Removed',
-            'channel_occupied' => 'Channel Occupied',
-            'channel_vacated' => 'Channel Vacated',
-        ]
-    ];
-
-    public function toFrontend()
-    {
-        return array_merge($this->toArray(), [
-            'event_type' => $this->map['event_types'][$this->event_type],
-        ]);
-    }
 }

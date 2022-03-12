@@ -62,7 +62,7 @@ class AppsController extends Controller
             ->orderBy('pusher_created_at', 'desc')
             ->limit(10)
             ->get()
-            ->map(fn($event) => $event->toFrontend());
+            ->map(fn($event) => $event->toArray());
 
         return Inertia::render('Dashboard/Apps/Debug', [
             'app' => fn() => $app->toArray(),
