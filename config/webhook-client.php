@@ -50,7 +50,7 @@ return [
              * To store all headers, set this value to `*`.
              */
             'store_headers' => [
-
+                'X-App-Id',
             ],
 
             /*

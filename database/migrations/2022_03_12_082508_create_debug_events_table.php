@@ -18,8 +18,9 @@ class CreateDebugEventsTable extends Migration
             $table->string('app_id');
             $table->string("event_type");
             $table->string("channel");
-            $table->string("event");
-            $table->json("data");
+            $table->string("event")->nullable();
+            $table->json("data")->nullable();
+            $table->string("user_id")->nullable();
             $table->dateTime("pusher_created_at");
             $table->timestamps();
         });
