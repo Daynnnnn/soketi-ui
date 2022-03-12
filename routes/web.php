@@ -31,3 +31,5 @@ Route::get('/apps/{id}/debug', [Controllers\AppsController::class, 'debug'])->mi
 
 Route::post('/apps/{id}/regenerate-credentials', [Controllers\AppsController::class, 'regenerateCredentials'])->middleware(['auth']);
 Route::post('/apps/{id}/save', [Controllers\AppsController::class, 'save'])->middleware(['auth']);
+
+Route::webhooks('webhooks');
