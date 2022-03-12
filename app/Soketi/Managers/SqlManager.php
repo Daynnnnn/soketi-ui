@@ -67,7 +67,7 @@ class SqlManager implements ManagerContract
             ->set('appKey', $model->key)
             ->set('appSecret', $model->secret)
             ->set('enabled', $model->enabled)
-            ->set('debug', $model->soketi_ui_settings->debug ?? false)
+            ->set('debug', $model->soketi_ui_settings['debug'] ?? false)
             ->set('maxConnections', $model->max_connections)
             ->set('enableClientMessages', $model->enable_client_messages)
             ->set('maxBackendEventsPerSecond', $model->max_backend_events_per_sec)

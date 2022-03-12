@@ -40,7 +40,11 @@ class App
 
     public function save(): self
     {
-        Manager::save($this);
+        $app = $this;
+
+        $app->webhooks = $this->pushWebhooks();
+
+        Manager::save($app);
 
         return $this;
     }
@@ -66,7 +70,7 @@ class App
             'maxEventNameLength' =>  $this->maxEventNameLength,
             'maxEventPayloadSize' => $this->maxEventPayloadSize,
             'maxEventBatchSize' => $this->maxEventBatchSize,
-            'webhooks' => $this->webhooks,
+            'webhooks' => $this->accessWebhooks(true),
         ];
     }
 
@@ -76,5 +80,34 @@ class App
         $this->appSecret = strtolower(Str::random(20));
 
         return $this;
+    }
+
+    protected function accessWebhooks()
+    {
+        return array_filter($this->webhooks, fn($webhook) => !($webhook['debug'] ?? false));
+    }
+
+    protected function pushWebhooks()
+    {
+        $webhooks = $this->webhooks;
+
+        if ($this->debug == true) {
+            array_push($webhooks, [
+                'debug' => true,
+                'url' => url('/webhooks'),
+                'event_types' => [
+                    'client_event',
+                    'channel_occupied',
+                    'channel_vacated',
+                    'member_added',
+                    'member_removed',
+                ],
+                'headers' => [
+                    'X-App-Id' => $this->appId,
+                ],
+            ]);
+        }
+
+        return $webhooks;
     }
 }
