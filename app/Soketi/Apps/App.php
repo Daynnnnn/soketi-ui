@@ -82,7 +82,7 @@ class App
         return $this;
     }
 
-    protected function accessWebhooks()
+    public function accessWebhooks()
     {
         return array_filter($this->webhooks, fn($webhook) => !($webhook['debug'] ?? false));
     }

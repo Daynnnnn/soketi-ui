@@ -18,7 +18,7 @@ class AppsController extends Controller
                 'enabled' => $app->get('enabled'),
                 'enable_client_messages' => $app->get('enableClientMessages'),
                 'max_connections' => $app->get('maxConnections'),
-                'webhook_count' => count($app->get('webhooks')),
+                'webhook_count' => count($app->accessWebhooks()),
             ];
         })->toArray();
 
