@@ -1,6 +1,5 @@
 <script>
     import { Inertia } from '@inertiajs/inertia'
-    import { fade } from 'svelte/transition'
 
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
     import DebugEvent from "../../../Components/Cards/DebugEventCard.svelte"
@@ -12,8 +11,8 @@
     let selectedEventMessage = false;
 
     setInterval(() => {
-        Inertia.get("/apps/1353760/debug");
-    }, 2000);
+        Inertia.reload({ only: ['debug_events']});
+    }, 1000);
 </script>
 
 <svelte:head>
