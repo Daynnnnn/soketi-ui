@@ -24,16 +24,15 @@
 </script>
 
 <div class="flex items-center">
-    <div class="transition duration-200 z-0 h-full bg-indigo-400 rounded-l-md shadow-sm px-4 py-2 {status !== 'inactive' ? "translate-x-5" : "translate-x-20"}">
-        {#if status == 'inprogress'}
-        <div class="animate-spin text-white h-6 w-6">
-            <FaSpinner />
+    <button on:click={onClick} type="button" class="ml-5 z-10 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 transition duration-200 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        {label}
+        <div>
+            <div class="{status != 'inprogress' ? "hidden" : ""} animate-spin text-white h-6 w-6 ml-2">
+                <FaSpinner />
+            </div>
+            <div class="{status != 'complete' ? "hidden" : ""} text-white h-6 w-6 ml-2">
+                <FaCheck />
+            </div>
         </div>
-        {:else}
-        <div class="text-white h-6 w-6">
-            <FaCheck />
-        </div>
-        {/if}
-    </div>
-    <button on:click={onClick} type="button" class="ml-5 z-10 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 transition duration-200 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{label}</button>
+    </button>
 </div>
