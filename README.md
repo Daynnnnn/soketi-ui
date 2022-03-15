@@ -1,3 +1,5 @@
+> :warning: **THIS IS A VERY EARLY, FAR FROM FINISHED, VERSION**
+
 # Soketi UI
 A dashboard to manage your apps in Soketi.
 
