@@ -3,7 +3,7 @@
 # Soketi UI
 A dashboard to manage your apps in Soketi.
 
-Not associated with the main Soketi project.
+Not affiliated with the main Soketi project.
 
 ## Requirements
 
