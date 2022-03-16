@@ -26,13 +26,13 @@
         </div>
         <div class="flex space-x-4">
             <div class="grid grid-cols-1 gap-4 {selectedEventMessage !== false ? "w-1/4" : "w-full"}">
-                {#each debug_events as debug_event}
-                <DebugEvent {debug_event} bind:selectedEventMessage />
+                {#each debug_events as debug_event, i}
+                <DebugEvent {debug_event} bind:selectedEventMessage {i} />
                 {/each}
             </div>
             {#if selectedEventMessage !== false}
             <div class="grow">
-                <SelectedDebugEventMessage bind:selectedEventMessage />
+                <SelectedDebugEventMessage bind:selectedEventMessage {debug_events} />
             </div>
             {/if}
         </div>
