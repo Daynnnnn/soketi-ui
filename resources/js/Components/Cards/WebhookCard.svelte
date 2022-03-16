@@ -1,11 +1,12 @@
 <script>
-    import Text from "../Inputs/Text.svelte"
-    import Select from 'svelte-select';
+    import Button from "../Inputs/Button.svelte"
     import HookIcon from 'svelte-icons/gi/GiMeatHook.svelte'
     import LambdaIcon from '../../Icons/Lambda.svelte'
-    import Delete from 'svelte-icons/io/IoMdCloseCircleOutline.svelte'
 
+    export let activeWebhook;
+    export let modalOpen;
     export let webhook;
+    export let webhooks;
 
     const fieldMap = {
         lambda: {
@@ -20,69 +21,76 @@
         },
     };
 
-    const awsRegions = [
-        {value: 'eu-west-1', label: 'eu-west-1'},
-        {value: 'eu-west-2', label: 'eu-west-2'},
-    ];
+    const eventStyles = {
+        client_event: {
+            name: 'Client Event',
+            class: "border-2 border-blue-600",
+        },
+        channel_occupied: { 
+            name: 'Channel Occupied',
+            class: "border-2 border-blue-600",
+        },
+        channel_vacated: {
+            name: 'Channel Vacated',
+            class: "border-2 border-blue-600",
+        },
+        member_added: {
+            name: 'Member Added',
+            class: "border-2 border-blue-600",
+        },
+        member_removed: {
+            name: 'Member Removed',
+            class: "border-2 border-blue-600",
+        },
+    };
 
-    const events = [
-        {value: 'client_event', label: 'Client Event'},
-        {value: 'channel_occupied', label: 'Channel Occupied'},
-        {value: 'channel_vacated', label: 'Channel Vacated'},
-        {value: 'member_added', label: 'Member Added'},
-        {value: 'member_removed', label: 'Member Removed'},
-    ];
+    const friendlyEvent = (event, key) => eventStyles[event][key];
 
-    function handleEventsSelect(event) {
-        webhook.events = [];
-        if (event.detail != null) event.detail.forEach(event => webhook.events.push(event.value));
+    function editWebhook() {
+        activeWebhook = webhook;
+        modalOpen = true;
     }
 
-    function handleRegionSelect(event) {
-        webhook.region = event.detail.value;
+    function deleteWebhook() {
+        webhooks[webhook] = null;
     }
 
-    function getEvents() {
-        if (webhook.events == null) return;
-        return events.filter(event => webhook.events.includes(event.value));
-    }
-
-    let type = (typeof webhook.url != 'undefined') ? 'url' : 'lambda';
+    let type = (typeof webhooks[webhook].lambda_function != 'undefined') ? 'lambda' : 'url';
 </script>
 
-{#if webhook !== null}
-<div class="w-full relative rounded-lg border border-gray-300 bg-white px-6 py-3 shadow-sm items-center space-y-2 divide-y-2 transition duration-200 hover:border-gray-400 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-    <div class="flex items-center space-x-2">
-    <div class="h-12 pr-2 flex items-center border-r-2 border-gray-200">
-        <svelte:component this={fieldMap[type]['icon']}/>
-    </div>
-    <div class="grow">
+{#if webhooks[webhook] !== null}
+<div class="w-full relative rounded-lg border border-gray-300 bg-white px-6 py-3 shadow-sm items-center space-y-2 transition duration-200 hover:border-gray-400 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+    <div class="flex w-full items-center space-x-2">
+    <div class="w-full">
         <div class="flex items-center">
-            <h1 class="font-semibold pl-1">
+            <h1 class="font-semibold">
                 {fieldMap[type]['title']}
             </h1>
-            <div class="grow">
-                <div on:click={() => webhook = null} class="transition duration-200 ml-auto w-8 h-8 cursor-pointer pb-2 hover:text-indigo-500">
-                <Delete />
-                </div>
-            </div>
         </div>
         <div class="w-full">
-            <Text bind:input={webhook[fieldMap[type]['key']]} />
+            {webhooks[webhook][fieldMap[type]['key']]}
+        </div>
+    </div>
+    <div class="w-full flex">
+        <div on:click={editWebhook} class="ml-auto">
+            <Button label="Edit" />
+        </div>
+        <div on:click={deleteWebhook}>
+            <Button label="Delete" />
         </div>
     </div>
     </div>
     <div class="w-full flex space-x-2 pt-2">
     <div class="{type == 'lambda' ? 'w-5/6' : 'w-full'}">
         <h1 class="font-semibold">Events</h1>
-        <Select on:select={handleEventsSelect} isMulti={true} items={events} value={getEvents()}></Select>
+        <div class="flex divide-x-2 -ml-2">
+        {#each Object.keys(eventStyles) as i}
+            {#if webhooks[webhook]['events'].includes(i)}
+            <p class="px-2">{friendlyEvent(i, 'name')}</p>
+            {/if}
+        {/each}
+        </div>
     </div>
-    {#if type == 'lambda'}
-    <div class="w-1/6">
-        <h1 class="font-semibold">AWS Region</h1>
-        <Select on:select={handleRegionSelect} items={awsRegions} value={webhook.region}></Select>
-    </div>
-    {/if}
     </div>
 </div>
 {/if}
