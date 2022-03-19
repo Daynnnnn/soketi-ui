@@ -19,11 +19,8 @@
   <title>Debug - {app.title} | Soketi UI</title>
 </svelte:head>
 
-<Dashboard items="apps" page="debug" appId={app.appId}>
+<Dashboard items="apps" page="debug" appId={app.appId} appTitle={app.title}>
     <div class="max-w-7xl items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
-        <div>
-            <h1 class="text-2xl font-semibold text-gray-900">{app.title}</h1>
-        </div>
         <div class="flex space-x-4">
             <div class="grid grid-cols-1 gap-4 {selectedEventMessage !== false ? "w-1/4" : "w-full"}">
                 {#each debug_events as debug_event, i}

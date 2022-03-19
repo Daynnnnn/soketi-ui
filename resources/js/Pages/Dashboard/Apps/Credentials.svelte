@@ -17,13 +17,8 @@
   <title>Credentials - {app.title} | Soketi UI</title>
 </svelte:head>
 
-<Dashboard items="apps" page="credentials" appId={app.appId}>
+<Dashboard items="apps" page="credentials" appId={app.appId} appTitle={app.title}>
     <AlertModal endpoint={'/apps/' + app.appId + '/regenerate-credentials'} text={regenModelText} bind:modalOpen={regenerateModal} />
-    <div class="max-w-7xl flex items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
-        <div>
-            <h1 class="text-2xl font-semibold text-gray-900">{app.title}</h1>
-        </div>
-    </div>
 
     <div class="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="grow mx-auto rounded-lg bg-white shadow-lg border border-gray-100">
