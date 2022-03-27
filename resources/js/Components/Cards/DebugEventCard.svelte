@@ -32,8 +32,8 @@
 <div on:click={() => selectedEventMessage = i} class="cursor-pointer w-full relative rounded-lg {selectedEventMessage === i ? "border-2 border-gray-600 bg-gray-50" : "border border-gray-300 hover:border-gray-400 hover:bg-gray-50"} py-5 shadow-sm flex items-center space-x-3 transition duration-200   focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
     <div class="flex flex-col items-center w-full text-center divide-y">
         <div class="w-full pb-2">
-            <div class="inline-block px-2 py-0.5 rounded-full {friendlyEvent(debugEvent.event_type, 'class')}">
-                <p class="text-lg">{friendlyEvent(debugEvent.event_type, 'name')}</p>
+            <div class="inline-block px-2 py-0.5 rounded-full {friendlyEvent(debugEvent.name, 'class')}">
+                <p class="text-lg">{friendlyEvent(debugEvent.name, 'name')}</p>
             </div>
             <p class="text-sm text-gray-500 pt-1">{debugEvent.pusher_created_at}</p>
         </div>

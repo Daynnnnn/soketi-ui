@@ -22,15 +22,10 @@ class ProcessDebugWebhook extends ProcessWebhookJob
         $timestamp = Carbon::parse($payload['time_ms'] / 1000)->toDateTimeString();
 
         foreach($payload['events'] as $event) {
-            NewDebugEvent::dispatch([
+            NewDebugEvent::dispatch(array_merge($event, [
                 'app_id' => $appId,
-                'event_type' => $event['name'],
-                'channel' => $event['channel'],
-                'event' => $event['event'] ?? null,
-                'data' => $event['data'] ?? null,
-                'user_id' => $event['user_id'] ?? null,
                 'pusher_created_at' => $timestamp,
-            ]);
+            ]));
         }
     }
 }
