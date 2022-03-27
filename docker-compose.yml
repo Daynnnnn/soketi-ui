@@ -55,11 +55,12 @@ services:
             test: ["CMD", "redis-cli", "ping"]
             retries: 3
             timeout: 5s
-    mailhog:
-        image: 'mailhog/mailhog:latest'
+    soketi:
+        image: 'quay.io/soketi/soketi:latest-16-alpine'
+        environment:
+            DEBUG: '1'
         ports:
-            - '${FORWARD_MAILHOG_PORT:-1025}:1025'
-            - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
+            - '${SOKETI_PORT:-6001}:6001'
         networks:
             - sail
 networks:
