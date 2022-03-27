@@ -1,18 +1,31 @@
 <script>
     import { Inertia } from '@inertiajs/inertia'
+    import Pusher from 'pusher-js';
 
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
     import DebugEvent from "../../../Components/Cards/DebugEventCard.svelte"
     import SelectedDebugEventMessage from "../../../Components/Cards/SelectedDebugEventMessageCard.svelte"
 
     export let app;
-    export let debug_events;
 
+    let debugEvents = [];
     let selectedEventMessage = false;
 
-    setInterval(() => {
-        Inertia.reload({ only: ['debug_events']});
-    }, 1000);
+    const pusher = new Pusher('app-key', {
+        wsHost: '127.0.0.1',
+        wsPort: 6001,
+        forceTLS: false,
+        encrypted: true,
+        enabledTransports: ['ws', 'wss'],
+    });
+
+    const channel = pusher.subscribe('debug-events_' + app['appId']);
+
+    channel.bind("App\\Events\\NewDebugEvent", (data) => {
+        debugEvents = [...debugEvents, data];
+    });
+
+    $: console.log(debugEvents)
 </script>
 
 <svelte:head>
@@ -23,13 +36,13 @@
     <div class="max-w-7xl items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
         <div class="flex space-x-4">
             <div class="grid grid-cols-1 gap-4 {selectedEventMessage !== false ? "w-1/4" : "w-full"}">
-                {#each debug_events as debug_event, i}
-                <DebugEvent {debug_event} bind:selectedEventMessage {i} />
+                {#each debugEvents as debugEvent, i}
+                <DebugEvent {debugEvent} bind:selectedEventMessage {i} />
                 {/each}
             </div>
             {#if selectedEventMessage !== false}
             <div class="grow">
-                <SelectedDebugEventMessage bind:selectedEventMessage {debug_events} />
+                <SelectedDebugEventMessage bind:selectedEventMessage {debugEvents} />
             </div>
             {/if}
         </div>

@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Soketi\Models\DebugEvent;
+use App\Events\NewDebugEvent;
 use Carbon\Carbon;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
 
@@ -22,7 +22,7 @@ class ProcessDebugWebhook extends ProcessWebhookJob
         $timestamp = Carbon::parse($payload['time_ms'] / 1000)->toDateTimeString();
 
         foreach($payload['events'] as $event) {
-            DebugEvent::create([
+            NewDebugEvent::dispatch([
                 'app_id' => $appId,
                 'event_type' => $event['name'],
                 'channel' => $event['channel'],
