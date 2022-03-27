@@ -22,7 +22,7 @@
     const channel = pusher.subscribe('debug-events_' + app['appId']);
 
     channel.bind("App\\Events\\NewDebugEvent", (data) => {
-        debugEvents = [...debugEvents, data];
+        debugEvents = [data, ...debugEvents];
     });
 
     $: console.log(debugEvents)
