@@ -2,13 +2,14 @@
     import { Inertia } from '@inertiajs/inertia'
     import Pusher from 'pusher-js';
 
+    import Button from "../../../Components/Inputs/Button.svelte"
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
     import DebugEvent from "../../../Components/Cards/DebugEventCard.svelte"
     import SelectedDebugEventMessage from "../../../Components/Cards/SelectedDebugEventMessageCard.svelte"
 
     export let app;
+    export let debugEvents;
 
-    let debugEvents = [];
     let selectedEventMessage = false;
 
     const pusher = new Pusher('app-key', {
@@ -33,6 +34,14 @@
 </svelte:head>
 
 <Dashboard items="apps" page="debug" appId={app.appId} appTitle={app.title}>
+    <div class="max-w-7xl flex items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
+        <div class="flex grow">
+            <div class="ml-auto">
+                <Button label="Clear Events" endpoint="/apps/{app.appId}/debug/clear" />
+            </div>
+       </div>
+    </div>
+
     <div class="max-w-7xl items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
         <div class="flex space-x-4">
             <div class="grid grid-cols-1 gap-4 {selectedEventMessage !== false ? "w-1/4" : "w-full"}">

@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Events\NewDebugEvent;
+use App\Stores\DebugEventStore;
 use Carbon\Carbon;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
 
@@ -21,11 +22,15 @@ class ProcessDebugWebhook extends ProcessWebhookJob
 
         $timestamp = Carbon::parse($payload['time_ms'] / 1000)->toDateTimeString();
 
-        foreach($payload['events'] as $event) {
-            NewDebugEvent::dispatch(array_merge($event, [
+        $events = array_map(function($event) use ($appId, $timestamp) {
+            NewDebugEvent::dispatch($event = array_merge($event, [
                 'app_id' => $appId,
                 'pusher_created_at' => $timestamp,
             ]));
-        }
+
+            return $event;
+        }, $payload['events']);
+
+        (new DebugEventStore($appId))->pushBatch($events);
     }
 }

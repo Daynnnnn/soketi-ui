@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Soketi\Facades\Manager;
+use App\Stores\DebugEventStore;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -59,7 +60,15 @@ class AppsController extends Controller
 
         return Inertia::render('Dashboard/Apps/Debug', [
             'app' => fn() => $app->toArray(),
+            'debugEvents' => fn() => (new DebugEventStore($id))->get(),
         ]);
+    }
+
+    public function debugClear($id)
+    {
+        (new DebugEventStore($id))->reset();
+
+        return redirect("/apps/$id/debug");
     }
 
     public function save($id)
