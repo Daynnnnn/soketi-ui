@@ -70,7 +70,7 @@ class App
             'maxEventNameLength' =>  $this->maxEventNameLength,
             'maxEventPayloadSize' => $this->maxEventPayloadSize,
             'maxEventBatchSize' => $this->maxEventBatchSize,
-            'webhooks' => $this->accessWebhooks(true),
+            'webhooks' => $this->accessWebhooks(),
         ];
     }
 
@@ -84,7 +84,7 @@ class App
 
     public function accessWebhooks()
     {
-        return array_filter($this->webhooks, fn($webhook) => !($webhook['debug'] ?? false));
+        return array_filter($this->webhooks ?? [], fn($webhook) => !($webhook['debug'] ?? false));
     }
 
     protected function pushWebhooks()
