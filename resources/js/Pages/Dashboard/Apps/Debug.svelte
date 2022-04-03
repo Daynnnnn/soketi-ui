@@ -1,11 +1,10 @@
 <script>
-    import { Inertia } from '@inertiajs/inertia'
     import Pusher from 'pusher-js';
 
     import Button from "../../../Components/Inputs/Button.svelte"
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
     import DebugEvent from "../../../Components/Cards/DebugEventCard.svelte"
-    import SelectedDebugEventMessage from "../../../Components/Cards/SelectedDebugEventMessageCard.svelte"
+    import FaSpinner from 'svelte-icons/fa/FaSpinner.svelte'
 
     export let app;
     export let debugEvents;
@@ -25,8 +24,6 @@
     channel.bind("App\\Events\\NewDebugEvent", (data) => {
         debugEvents = [data, ...debugEvents];
     });
-
-    $: console.log(debugEvents)
 </script>
 
 <svelte:head>
@@ -43,17 +40,38 @@
     </div>
 
     <div class="max-w-7xl items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
-        <div class="flex space-x-4">
-            <div class="grid grid-cols-1 gap-4 {selectedEventMessage !== false ? "w-1/4" : "w-full"}">
-                {#each debugEvents as debugEvent, i}
-                <DebugEvent {debugEvent} bind:selectedEventMessage {i} />
-                {/each}
+        <div class="bg-gray-50 rounded-t-lg">
+        <div class="flex items-center font-semibold p-2">
+            <div class="w-1/5">
+                Event
             </div>
-            {#if selectedEventMessage !== false}
-            <div class="grow">
-                <SelectedDebugEventMessage bind:selectedEventMessage {debugEvents} />
+            <div class="w-1/3">
+                Channel
             </div>
-            {/if}
+            <div class="w-1/3">
+                User ID
+            </div>
+            <div class="w-1/5">
+                Timestamp
+            </div>
         </div>
+        </div>
+
+        {#if debugEvents.length != 0}
+        {#each debugEvents as debugEvent, i}
+        <div class="py-2">
+            <DebugEvent {debugEvent} bind:selectedEventMessage {i} />
+        </div>
+        {/each}
+        {:else}
+        <div class="py-3">
+            <div class="flex items-center p-2 text-center">
+                <div class="animate-spin text-black h-4 w-4 mr-2">
+                    <FaSpinner />
+                </div>
+                Waiting for events...
+            </div>
+        </div>
+        {/if}
     </div>
 </Dashboard>

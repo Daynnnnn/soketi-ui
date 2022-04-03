@@ -1,7 +1,5 @@
 <script>
     export let debugEvent;
-    export let selectedEventMessage;
-    export let i;
 
     const events = {
         client_event: {
@@ -26,25 +24,34 @@
         },
     };
 
+    let active = false;
+
     const friendlyEvent = (event, key) => events[event][key];
 </script>
 
-<div on:click={() => selectedEventMessage = i} class="cursor-pointer w-full relative rounded-lg {selectedEventMessage === i ? "border-2 border-gray-600 bg-gray-50" : "border border-gray-300 hover:border-gray-400 hover:bg-gray-50"} py-5 shadow-sm flex items-center space-x-3 transition duration-200   focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-    <div class="flex flex-col items-center w-full text-center divide-y">
-        <div class="w-full pb-2">
-            <div class="inline-block px-2 py-0.5 rounded-full {friendlyEvent(debugEvent.name, 'class')}">
-                <p class="text-lg">{friendlyEvent(debugEvent.name, 'name')}</p>
+<div class="rounded-xl {active ? "border-2 border-gray-800" : "border border-gray-200"}">
+    <div on:click={() => active = !active} class="cursor-pointer flex items-center p-2">
+        <div class="w-1/5">
+            <div class="inline-block rounded-full py-1 px-2 {friendlyEvent(debugEvent.name, 'class')}">
+                {friendlyEvent(debugEvent.name, 'name')}
             </div>
-            <p class="text-sm text-gray-500 pt-1">{debugEvent.pusher_created_at}</p>
         </div>
-        <div class="w-full pt-2">
-            <p><b>Channel:</b> {debugEvent.channel}</p>
-            {#if debugEvent.event}
-            <p><b>Event:</b> {debugEvent.event}</p>
-            {/if}
-            {#if debugEvent.user_id}
-            <p><b>User ID:</b> {debugEvent.user_id}</p>
-            {/if}
+        <div class="w-1/3">
+            {debugEvent.channel ?? 'N/A'}
+        </div>
+        <div class="w-1/3">
+            {debugEvent.user_id ?? 'N/A'}
+        </div>
+        <div class="w-1/5">
+            {debugEvent.pusher_created_at}
         </div>
     </div>
+    
+    {#if active}
+    <div class="rounded-b-xl bg-gray-800 text-white">
+        <div class="p-4">
+            <pre>{debugEvent !== null ? JSON.stringify(debugEvent, null, " ") : "No message attached to this event!"}</pre>
+        </div>
+    </div>
+    {/if}    
 </div>
