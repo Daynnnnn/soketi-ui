@@ -22,7 +22,7 @@
     const channel = pusher.subscribe('debug-events_' + app['appId']);
 
     channel.bind("App\\Events\\NewDebugEvent", (data) => {
-        debugEvents = [data, ...debugEvents];
+        debugEvents = [...debugEvents, data];
     });
 </script>
 
@@ -33,6 +33,12 @@
 <Dashboard items="apps" page="debug" appId={app.appId} appTitle={app.title}>
     <div class="max-w-7xl flex items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
         <div class="flex grow">
+            <div class="flex items-center p-2 text-center">
+                <div class="animate-spin text-black h-4 w-4 mr-2">
+                    <FaSpinner />
+                </div>
+                Listening for events...
+            </div>
             <div class="ml-auto">
                 <Button label="Clear Events" endpoint="/apps/{app.appId}/debug/clear" />
             </div>
@@ -40,8 +46,8 @@
     </div>
 
     <div class="max-w-7xl items-center mx-auto px-4 sm:px-6 md:px-8 pb-4">
-        <div class="bg-gray-50 rounded-t-lg">
-        <div class="flex items-center font-semibold p-2">
+        <div>
+        <div class="flex items-center font-semibold p-2 bg-gray-50 rounded-lg">
             <div class="w-1/5">
                 Event
             </div>
@@ -55,22 +61,13 @@
                 Timestamp
             </div>
         </div>
-        </div>
-
         {#if debugEvents.length != 0}
+        <div class="w-full flex flex-col-reverse">
         {#each debugEvents as debugEvent, i}
-        <div class="py-2">
+        <div class="w-full py-2">
             <DebugEvent {debugEvent} bind:selectedEventMessage {i} />
         </div>
         {/each}
-        {:else}
-        <div class="py-3">
-            <div class="flex items-center p-2 text-center">
-                <div class="animate-spin text-black h-4 w-4 mr-2">
-                    <FaSpinner />
-                </div>
-                Waiting for events...
-            </div>
         </div>
         {/if}
     </div>

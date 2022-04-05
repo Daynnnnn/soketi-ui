@@ -29,7 +29,7 @@ class DebugEventStore
     public function pushBatch($events)
     {
         foreach($events as $event) {
-             $this->debugEvents->prepend($event);
+             $this->debugEvents->push($event);
         }
 
         $this->save();

@@ -24,12 +24,17 @@
         },
     };
 
+    let isNew = true;
     let active = false;
 
     const friendlyEvent = (event, key) => events[event][key];
+
+    setTimeout(() => {
+        isNew = false;
+    }, 1000);
 </script>
 
-<div class="rounded-xl {active ? "border-2 border-gray-800" : "border border-gray-200"}">
+<div class="transition-all duration-500 rounded-xl border {isNew ? "border-indigo-600" : active ? "border-gray-600" : "border-gray-300"}">
     <div on:click={() => active = !active} class="cursor-pointer flex items-center p-2">
         <div class="w-1/5">
             <div class="inline-block rounded-full py-1 px-2 {friendlyEvent(debugEvent.name, 'class')}">
