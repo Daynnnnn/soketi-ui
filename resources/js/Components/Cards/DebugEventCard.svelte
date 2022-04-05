@@ -55,7 +55,7 @@
     {#if active}
     <div class="rounded-b-xl bg-gray-800 text-white">
         <div class="p-4">
-            <pre>{debugEvent !== null ? JSON.stringify(debugEvent, null, " ") : "No message attached to this event!"}</pre>
+            <pre>{debugEvent !== null ? JSON.stringify(debugEvent, null, "    ") : "No message attached to this event!"}</pre>
         </div>
     </div>
     {/if}    
