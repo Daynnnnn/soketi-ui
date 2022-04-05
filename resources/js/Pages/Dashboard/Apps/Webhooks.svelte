@@ -1,6 +1,4 @@
 <script>
-    import { fly } from 'svelte/transition';
-
     import Dashboard from "../../../Components/Layouts/Dashboard.svelte"
     import Button from "../../../Components/Inputs/Button.svelte"
     import WebhookCard from "../../../Components/Cards/WebhookCard.svelte"
@@ -47,9 +45,7 @@
     <div class="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-4">
             {#each app.webhooks as _, i}
-                <div in:fly="{{ x: -200, duration: 500 }}" >
-                    <WebhookCard bind:modalOpen bind:activeWebhook={activeWebhook} bind:webhooks={app.webhooks} webhook={i} />
-                </div>
+                <WebhookCard bind:modalOpen bind:activeWebhook={activeWebhook} bind:webhooks={app.webhooks} webhook={i} />
             {/each}
         </div>
     </div>
