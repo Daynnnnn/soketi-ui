@@ -9,8 +9,6 @@
     export let app;
     export let debugEvents;
 
-    let selectedEventMessage = false;
-
     const pusher = new Pusher('app-key', {
         wsHost: '127.0.0.1',
         wsPort: 6001,
@@ -65,7 +63,7 @@
         <div class="w-full flex flex-col-reverse">
         {#each debugEvents as debugEvent, i}
         <div class="w-full py-2">
-            <DebugEvent {debugEvent} bind:selectedEventMessage {i} />
+            <DebugEvent {debugEvent} />
         </div>
         {/each}
         </div>
