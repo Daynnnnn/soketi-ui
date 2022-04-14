@@ -60,13 +60,13 @@ class AppsController extends Controller
 
         return Inertia::render('Dashboard/Apps/Debug', [
             'app' => fn() => $app->toArray(),
-            'debugEvents' => fn() => (new DebugEventStore($id))->get(),
+            'debugEvents' => fn() => (new DebugEventStore($id))->all(),
         ]);
     }
 
     public function debugClear($id)
     {
-        (new DebugEventStore($id))->reset();
+        (new DebugEventStore($id))->reset()->save();
 
         return redirect("/apps/$id/debug");
     }

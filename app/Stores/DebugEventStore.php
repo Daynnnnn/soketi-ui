@@ -3,46 +3,27 @@
 namespace App\Stores;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Collection;
 
-class DebugEventStore
+class DebugEventStore extends Collection
 {
     protected $id;
-    protected $debugEvents;
     
-    public function __construct($id)
+    public function __construct($id, $items = [])
     {
         $this->id = $id;
-        $this->debugEvents = Cache::rememberForever('debug_events::'.$this->id, fn() => collect());
-    }
-
-    public function get()
-    {
-        return $this->debugEvents;
-    }
-
-    public function push($event)
-    {
-        $this->debugEvents->prepend($event);
-        $this->save();
-    }
-
-    public function pushBatch($events)
-    {
-        foreach($events as $event) {
-             $this->debugEvents->push($event);
-        }
-
-        $this->save();
+        $this->items = Cache::rememberForever('debug_events::'.$this->id, fn() => $this->getArrayableItems($items));
     }
 
     public function reset()
     {
-        $this->debugEvents = collect();
-        $this->save();
+       $this->items = [];
+
+       return $this;
     }
 
-    protected function save()
+    public function save()
     {
-        Cache::put('debug_events::'.$this->id, $this->debugEvents);
+        Cache::put('debug_events::'.$this->id, $this->items);
     }
 }
