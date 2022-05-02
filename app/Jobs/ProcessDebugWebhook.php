@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Events\NewDebugEvent;
+use App\Events\NewDebugEvents;
 use App\Stores\DebugEventStore;
 use Carbon\Carbon;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
@@ -24,17 +24,12 @@ class ProcessDebugWebhook extends ProcessWebhookJob
 
         $debugEventStore = new DebugEventStore($appId);
 
-        $events = array_map(function($event) use ($appId, $timestamp, $debugEventStore) {
-            NewDebugEvent::dispatch($event = array_merge($event, [
-                'app_id' => $appId,
-                'pusher_created_at' => $timestamp,
-            ]));
-
-            $debugEventStore->push($event);
-
-            return $event;
-        }, $payload['events']);
+        $events = collect($payload['events'])
+            ->map(fn($event) => array_merge($event, ['pusher_created_at' => $timestamp]))
+            ->each(fn($event) => $debugEventStore->push($event));
 
         $debugEventStore->save();
+
+        NewDebugEvents::dispatch($events, $appId);
     }
 }

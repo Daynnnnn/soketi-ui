@@ -9,21 +9,25 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Collection;
 
-class NewDebugEvent implements ShouldBroadcast
+class NewDebugEvents implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $event;
+    protected $events;
+    protected $appId;
+    protected $timestamp;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(array $event)
+    public function __construct(Collection $events, $appId)
     {
-        $this->event = $event;
+        $this->events = $events;
+        $this->appId = $appId;
     }
 
     /**
@@ -33,7 +37,7 @@ class NewDebugEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('debug-events_' . $this->event['app_id']);
+        return new Channel('debug-events_' . $this->appId);
     }
 
     /**
@@ -43,6 +47,6 @@ class NewDebugEvent implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        return $this->event;
+        return $this->events->toArray();
     }
 }

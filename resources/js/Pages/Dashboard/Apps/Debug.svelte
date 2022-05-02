@@ -19,8 +19,8 @@
 
     const channel = pusher.subscribe('debug-events_' + app['appId']);
 
-    channel.bind("App\\Events\\NewDebugEvent", (data) => {
-        debugEvents = [...debugEvents, data];
+    channel.bind("App\\Events\\NewDebugEvents", (data) => {
+        debugEvents = [...debugEvents, ...data];
     });
 </script>
 
