@@ -10,7 +10,7 @@
     let activeWebhook = false;
     let defaultWebhook = {
         url: '',
-        events: [],
+        event_types: [],
     };
 
     function addWebhook() {

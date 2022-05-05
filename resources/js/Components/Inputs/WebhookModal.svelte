@@ -39,8 +39,8 @@
     ];
 
     function handleEventsSelect(event) {
-        webhook.events = [];
-        if (event.detail != null) event.detail.forEach(event => webhook.events.push(event.value));
+        webhook.event_types = [];
+        if (event.detail != null) event.detail.forEach(event => webhook.event_types.push(event.value));
     }
 
     function handleWebhooksSelect(event) {
@@ -48,8 +48,8 @@
     }
 
     function getEvents() {
-        if (webhook.events == null) return;
-        return events.filter(event => webhook.events.includes(event.value));
+        if (webhook.event_types == null) return;
+        return events.filter(event => webhook.event_types.includes(event.value));
     }
 
     function getWebhookType() {

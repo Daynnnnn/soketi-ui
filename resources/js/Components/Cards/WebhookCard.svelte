@@ -85,7 +85,7 @@
         <h1 class="font-semibold">Events</h1>
         <div class="flex divide-x-2 -ml-2">
         {#each Object.keys(eventStyles) as i}
-            {#if webhooks[webhook]['events'].includes(i)}
+            {#if webhooks[webhook]['event_types'].includes(i)}
             <p class="px-2">{friendlyEvent(i, 'name')}</p>
             {/if}
         {/each}
