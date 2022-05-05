@@ -22,7 +22,7 @@
         </div>
         <div class="w-1/3">
             <h1 class="font-bold">Max Connections</h1>
-            <p>{app.max_connections == 0 ? "∞" : app.max_connections}</p>
+            <p>{app.max_connections == -1 ? "∞" : app.max_connections}</p>
         </div>
         <div class="w-1/3">
             <h1 class="font-bold">Webhooks</h1>

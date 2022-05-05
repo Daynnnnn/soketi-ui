@@ -31,10 +31,10 @@
                         </div>
                     </div>
                 </div>
-                <TextWithToggle label="Max Connections" defaultValue="0" placeholder="∞" bind:input={app.maxConnections} />
-                <TextWithToggle label="Max Backend Events / Second" defaultValue="0" placeholder="∞" bind:input={app.maxBackendEventsPerSecond} />
-                <TextWithToggle label="Max Client Events / Second" defaultValue="0" placeholder="∞" bind:input={app.maxClientEventsPerSecond} />
-                <TextWithToggle label="Max Read Requests / Second" defaultValue="0" placeholder="∞" bind:input={app.maxReadRequestsPerSecond} />
+                <TextWithToggle label="Max Connections" defaultValue="-1" placeholder="∞" bind:input={app.maxConnections} />
+                <TextWithToggle label="Max Backend Events / Second" defaultValue="-1" placeholder="∞" bind:input={app.maxBackendEventsPerSecond} />
+                <TextWithToggle label="Max Client Events / Second" defaultValue="-1" placeholder="∞" bind:input={app.maxClientEventsPerSecond} />
+                <TextWithToggle label="Max Read Requests / Second" defaultValue="-1" placeholder="∞" bind:input={app.maxReadRequestsPerSecond} />
                 <TextWithToggle label="Max Presence Members / Channel" defaultValue={null} placeholder="∞" bind:input={app.maxPresenceMembersPerChannel} />
                 <TextWithToggle label="Max Presence Member Size (KB)" defaultValue={null} placeholder="∞" bind:input={app.maxPresenceMemberSize} />
                 <TextWithToggle label="Max Channel Name Length" defaultValue={null} placeholder="∞" bind:input={app.maxChannelNameLength} />
