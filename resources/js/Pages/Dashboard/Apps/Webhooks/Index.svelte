@@ -1,4 +1,5 @@
 <script>
+    import { Inertia } from '@inertiajs/inertia';
     import Dashboard from "../../../../Components/Layouts/Dashboard.svelte"
     import WebhookCard from "../../../../Components/Cards/WebhookCard.svelte"
     import FaPlus from 'svelte-icons/fa/FaPlus.svelte'
@@ -7,6 +8,12 @@
 
     const newWebhook = () => {
         app.webhooks.push({})
+    }
+
+    const handleSave = (webhook) => {
+        app.webhooks[webhook.detail.index] = webhook.detail.webhook;
+
+        Inertia.post('/apps/'+app.appId+'/save', app);
     }
 </script>
 
@@ -17,8 +24,8 @@
 <Dashboard items="apps" page="webhooks" appId={app.appId} appTitle={app.title}>
     <div class="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div class="grid gap-4">
-            {#each app.webhooks as webhook}
-                <WebhookCard appId={app.id} {webhook} />
+            {#each app.webhooks as webhook, index}
+                <WebhookCard on:message={handleSave} appId={app.id} {webhook} {index} />
             {/each}
             <button on:click={newWebhook}>
                 <div class="w-full relative rounded-lg border border-gray-300 bg-white px-6 py-3 shadow-sm items-center space-y-2 transition duration-200 hover:border-gray-400 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
