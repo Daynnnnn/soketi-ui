@@ -49,7 +49,7 @@ class AppsController extends Controller
     {
         $app = Manager::find($id);
 
-        return Inertia::render('Dashboard/Apps/Webhooks', [
+        return Inertia::render('Dashboard/Apps/Webhooks/Index', [
             'app' => $app->toArray(),
         ]);
     }
