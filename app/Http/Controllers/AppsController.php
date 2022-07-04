@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Soketi\Facades\Manager;
 use App\Stores\DebugEventStore;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AppsController extends Controller
@@ -59,8 +58,8 @@ class AppsController extends Controller
         $app = Manager::find($id);
 
         return Inertia::render('Dashboard/Apps/Debug', [
-            'app' => fn() => $app->toArray(),
-            'debugEvents' => fn() => (new DebugEventStore($id))->all(),
+            'app' => fn () => $app->toArray(),
+            'debugEvents' => fn () => (new DebugEventStore($id))->all(),
         ]);
     }
 

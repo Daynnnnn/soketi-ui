@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn() => redirect('/login'));
+Route::get('/', fn () => redirect('/login'));
 
 Route::get('/login', [Controllers\LoginController::class, 'show'])->name('login');
 Route::post('/login', [Controllers\LoginController::class, 'login']);
@@ -23,7 +22,7 @@ Route::post('/login', [Controllers\LoginController::class, 'login']);
 Route::get('/logout', [Controllers\LoginController::class, 'logout']);
 
 Route::get('/apps', [Controllers\AppsController::class, 'index'])->middleware(['auth']);
-Route::get('/apps/{id}', fn($id) => redirect("/apps/$id/credentials"))->middleware(['auth']);
+Route::get('/apps/{id}', fn ($id) => redirect("/apps/$id/credentials"))->middleware(['auth']);
 Route::get('/apps/{id}/credentials', [Controllers\AppsController::class, 'credentials'])->middleware(['auth']);
 Route::get('/apps/{id}/limits', [Controllers\AppsController::class, 'limits'])->middleware(['auth']);
 Route::get('/apps/{id}/webhooks', [Controllers\AppsController::class, 'webhooks'])->middleware(['auth']);

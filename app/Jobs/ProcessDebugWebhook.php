@@ -25,8 +25,8 @@ class ProcessDebugWebhook extends ProcessWebhookJob
         $debugEventStore = new DebugEventStore($appId);
 
         $events = collect($payload['events'])
-            ->map(fn($event) => array_merge($event, ['pusher_created_at' => $timestamp]))
-            ->each(fn($event) => $debugEventStore->push($event));
+            ->map(fn ($event) => array_merge($event, ['pusher_created_at' => $timestamp]))
+            ->each(fn ($event) => $debugEventStore->push($event));
 
         $debugEventStore->save();
 

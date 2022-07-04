@@ -11,7 +11,7 @@ class SqlManager implements ManagerContract
 {
     public function all(): Collection
     {
-        return SqlApp::get()->map(fn($app) => self::modelToApp($app));
+        return SqlApp::get()->map(fn ($app) => self::modelToApp($app));
     }
 
     public function find($id): App

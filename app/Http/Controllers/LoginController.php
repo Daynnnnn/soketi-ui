@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function show()
     {
-        if (!is_null(Auth::user())) {
+        if (! is_null(Auth::user())) {
             return redirect('/apps');
         }
 
@@ -27,7 +27,7 @@ class LoginController extends Controller
 
         return Inertia::render('Login', [
             'errors' => [
-                'message' => 'Incorrect Email or Password.'
+                'message' => 'Incorrect Email or Password.',
             ],
         ]);
     }
@@ -35,6 +35,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
+
         return redirect('/login');
     }
 }
