@@ -161,24 +161,20 @@
     </dl>
 </div>
 <div class="flex w-24 rounded-r-md h-full items-center cursor-pointer ">
-        {#if editMode}
-        <div on:click={toggleEditMode} class="w-full h-full flex bg-gray-700">
-            <div class="text-white m-auto inline-block align-middle w-8">
-                <IoMdSave />
-            </div>
+    <div on:click={toggleEditMode} class="w-1/2 h-full flex bg-gray-700">
+        <div class="text-white m-auto inline-block align-middle w-8">
+            {#if editMode}
+            <IoMdSave />
+            {:else}
+            <TiPencil />
+            {/if}
         </div>
-        {:else}
-        <div on:click={toggleEditMode} class="w-1/2 h-full flex bg-gray-700">
-            <div class="text-white m-auto inline-block align-middle w-8">
-                <TiPencil />
-            </div>
+    </div>
+    <div on:click={deleteWebhook} class="w-1/2 h-full flex bg-red-500 rounded-r-lg">
+        <div class="text-white m-auto block w-8"> 
+            <MdDelete />                
         </div>
-        <div on:click={deleteWebhook} class="w-1/2 h-full flex bg-red-500 rounded-r-lg">
-            <div class="text-white m-auto block w-8">
-                <MdDelete />
-            </div>
-        </div>
-        {/if}
+    </div>
 </div>
 </div>
 {/if}
