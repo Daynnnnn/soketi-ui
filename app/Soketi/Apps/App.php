@@ -108,6 +108,6 @@ class App
             ]);
         }
 
-        return $webhooks;
+        return array_filter($webhooks);
     }
 }

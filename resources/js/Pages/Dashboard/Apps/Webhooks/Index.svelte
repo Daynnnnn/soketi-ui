@@ -7,10 +7,20 @@
     export let app;
 
     const newWebhook = () => {
-        app.webhooks.push({})
+        app.webhooks = [...app.webhooks, {
+            lambda_function: '',
+            filters: {},
+            headers: {},
+        }];
     }
 
     const handleSave = (webhook) => {
+        if (webhook.detail.webhook == null) {
+            delete app.webhooks[webhook.detail.index]
+        }
+
+        console.log('deletey')
+
         app.webhooks[webhook.detail.index] = webhook.detail.webhook;
 
         Inertia.post('/apps/'+app.appId+'/save', app);

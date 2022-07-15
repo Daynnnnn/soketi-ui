@@ -5,6 +5,7 @@
     import Select from 'svelte-select';
     import IoMdSave from 'svelte-icons/io/IoMdSave.svelte'
     import TiPencil from 'svelte-icons/ti/TiPencil.svelte'
+    import MdDelete from 'svelte-icons/md/MdDelete.svelte'
 
     export let webhook;
     export let index;
@@ -43,6 +44,11 @@
         }
     }
 
+    function deleteWebhook() {
+        webhook = null;
+        dispatch('message', {webhook: webhook, index: index});
+    }
+
     function addHeader() {
         webhook['headers']['X-Header'] = null;
     }
@@ -67,7 +73,13 @@
         if (webhook.event_types == null) return;
         return events.filter(event => webhook.event_types.includes(event.value));
     }
+
+    if (webhook.lambda_function === '' || webhook.url === '') {
+        editMode = true;
+    }
 </script>
+
+{#if webhook != null}
 <div class="w-full flex rounded-lg border transition duration-200 border-gray-300 hover:border-gray-400 shadow-sm  focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
 <div class="w-full rounded-lg bg-white px-6 py-3 items-center space-y-2 transition duration-200 hover:bg-gray-50">
     <dl class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-4">
@@ -148,13 +160,25 @@
     </div>
     </dl>
 </div>
-<div on:click={toggleEditMode} class="flex w-12 bg-gray-800 rounded-r-md h-full items-center cursor-pointer">
-    <div class="text-white m-auto block w-8">
+<div class="flex w-24 rounded-r-md h-full items-center cursor-pointer ">
         {#if editMode}
-        <IoMdSave />
+        <div on:click={toggleEditMode} class="w-full h-full flex bg-gray-700">
+            <div class="text-white m-auto inline-block align-middle w-8">
+                <IoMdSave />
+            </div>
+        </div>
         {:else}
-        <TiPencil />
+        <div on:click={toggleEditMode} class="w-1/2 h-full flex bg-gray-700">
+            <div class="text-white m-auto inline-block align-middle w-8">
+                <TiPencil />
+            </div>
+        </div>
+        <div on:click={deleteWebhook} class="w-1/2 h-full flex bg-red-500 rounded-r-lg">
+            <div class="text-white m-auto block w-8">
+                <MdDelete />
+            </div>
+        </div>
         {/if}
-    </div>
 </div>
 </div>
+{/if}
