@@ -125,6 +125,6 @@ class App
             ]);
         }
 
-        return array_filter($webhooks);
+        return array_values(array_filter($webhooks));
     }
 }
