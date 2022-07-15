@@ -8,22 +8,39 @@ use Illuminate\Support\Str;
 class App
 {
     protected $title;
+
     protected $appId;
+
     protected $appKey;
+
     protected $appSecret;
+
     protected $enabled;
+
     protected $debug;
+
     protected $maxConnections;
+
     protected $maxBackendEventsPerSecond;
+
     protected $maxClientEventsPerSecond;
+
     protected $maxReadRequestsPerSecond;
+
     protected $maxPresenceMembersPerChannel;
+
     protected $maxPresenceMemberSize;
+
     protected $maxChannelNameLength;
+
     protected $maxSimultaneousEventChannels;
+
     protected $maxEventNameLength;
+
     protected $maxEventPayloadSize;
+
     protected $maxEventBatchSize;
+
     protected $webhooks;
 
     public function get($item)
@@ -84,7 +101,7 @@ class App
 
     public function accessWebhooks()
     {
-        return array_filter($this->webhooks ?? [], fn($webhook) => !($webhook['debug'] ?? false));
+        return array_filter($this->webhooks ?? [], fn ($webhook) => ! ($webhook['debug'] ?? false));
     }
 
     protected function pushWebhooks()
