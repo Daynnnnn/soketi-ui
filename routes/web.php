@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->prefix('apps')->name('apps.')->group(fu
     Route::prefix('{app}')->group(function () {
         Route::prefix('webhooks')->name('webhooks.')->group(function () {
             Route::post('save', [WebhooksController::class, 'save']);
+            Route::post('delete', [WebhooksController::class, 'delete']);
         });
 
         Route::post('limits', [LimitsController::class, 'save'])->name('limits');

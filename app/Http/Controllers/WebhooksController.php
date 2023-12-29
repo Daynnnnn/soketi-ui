@@ -32,4 +32,11 @@ class WebhooksController extends Controller
 
         $app->save();
     }
+
+    public function delete(Request $request, App $app)
+    {
+        $app->webhooks = $app->webhooks->filter(fn ($webhook) => $webhook['id'] !== $request->id)->values();
+
+        $app->save();
+    }
 }

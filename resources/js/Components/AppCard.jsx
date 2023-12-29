@@ -91,7 +91,7 @@ export default function AppCard({ app }) {
                         <h3 className='pl-1 text-lg font-bold'>Webhooks</h3>
                     </div>
                     <div className='pt-2 grid lg:grid-cols-2 gap-2'>
-                        {app.webhooks && app.webhooks.map((webhook, index) => <WebhookCard key={index} webhook={webhook} onEdit={() => editWebhook(webhook.id)} />)}
+                        {app.webhooks && app.webhooks.map((webhook, index) => <WebhookCard key={index} appId={app.id} webhook={webhook} onEdit={() => editWebhook(webhook.id)} />)}
                     </div>
                     {! app.webhooks?.length && (
                         <div className='p-4 border border-dashed text-gray-500 border-gray-200 shadow-sm rounded-xl'>
