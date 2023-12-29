@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AppsController;
+use App\Http\Controllers\LimitsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebhooksController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,9 +19,18 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/apps', function () {
-    return Inertia::render('Apps');
-})->middleware(['auth', 'verified'])->name('apps');
+Route::middleware(['auth', 'verified'])->prefix('apps')->name('apps.')->group(function () {
+    Route::get('/', [AppsController::class, 'index'])->name('index');
+    Route::prefix('{app}')->group(function () {
+        Route::prefix('webhooks')->name('webhooks.')->group(function () {
+            Route::post('save', [WebhooksController::class, 'save']);
+        });
+
+        Route::post('limits', [LimitsController::class, 'save'])->name('limits');
+    });
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
