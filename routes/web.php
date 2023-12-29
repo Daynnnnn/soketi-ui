@@ -28,6 +28,8 @@ Route::middleware(['auth', 'verified'])->prefix('apps')->name('apps.')->group(fu
         });
 
         Route::post('limits', [LimitsController::class, 'save'])->name('limits');
+
+        Route::post('refresh-credentials', [AppsController::class, 'refreshCredentials'])->name('refresh-credentials');
     });
 });
 
