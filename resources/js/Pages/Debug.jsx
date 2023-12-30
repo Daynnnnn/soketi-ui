@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Pusher from 'pusher-js'
 import { getEventType } from '@/utils/eventTypes';
 import ActivePill from '@/Components/ActivePill';
+import { ArrowsClockwise } from 'phosphor-react';
 
 const EventInfo = ({ event }) => {
     return (
@@ -101,9 +102,20 @@ export default function Debug(props) {
                                             Created At
                                         </div>
                                     </div>
-                                    <div className="divide-y divide-gray-200 bg-white">
-                                        {events.map((event) => <DebugCard key={event.uuid} event={event} />)}
-                                    </div>
+                                    {events.length ? (
+                                        <div className="divide-y divide-gray-200 bg-white">
+                                            {events.map((event) => <DebugCard key={event.uuid} event={event} />)}
+                                        </div>
+                                    ) : (
+                                        <div className='py-4 flex flex-col w-full'>
+                                            <div className='flex items-center mx-auto space-x-2'>
+                                                <div className='animate-spin'>
+                                                    <ArrowsClockwise className='text-gray-500' />
+                                                </div>
+                                                <p className='text-gray-500'>Listening for events...</p>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                                 </div>
                             </div>
