@@ -39,4 +39,31 @@ class WebhooksController extends Controller
 
         $app->save();
     }
+
+    public function toggleDebuggingWebhook(Request $request, App $app)
+    {
+        $debuggingWebhook = $app->webhooks->firstWhere(fn ($webhook) => $webhook['debug'] ?? false);
+
+        if (! $debuggingWebhook) {
+            $app->webhooks = $app->webhooks->push([
+                'id' => Str::uuid(),
+                'debug' => true,
+                'url' => url('/webhooks'),
+                'event_types' => [
+                    'client_event',
+                    'channel_occupied',
+                    'channel_vacated',
+                    'member_added',
+                    'member_removed',
+                ],
+                'headers' => [
+                    'X-App-Id' => $app->id,
+                ],
+            ]);
+        } else {
+            $app->webhooks = $app->webhooks->filter(fn ($webhook) => !($webhook['debug'] ?? false));
+        }
+
+        $app->save();
+    }
 }
