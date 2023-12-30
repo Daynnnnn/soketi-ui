@@ -1,10 +1,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
+import { Head, router } from '@inertiajs/react';
+import { useEffect, useMemo, useState } from 'react';
 import Pusher from 'pusher-js'
 import { getEventType } from '@/utils/eventTypes';
 import ActivePill from '@/Components/ActivePill';
 import { ArrowsClockwise } from 'phosphor-react';
+import Modal from '@/Components/Modal';
+import SecondaryButton from '@/Components/SecondaryButton';
+import DangerButton from '@/Components/DangerButton';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 const EventInfo = ({ event }) => {
     return (
@@ -37,6 +41,7 @@ const DebugCard = ({ event }) => {
 
 export default function Debug(props) {
     const [events, setEvents] = useState([]);
+    const [showAddDebuggingWebhookModal, setShowAddDebuggingWebhookModal] = useState(false);
 
     useEffect(() => {
         const pusher = new Pusher('app-key', {
@@ -57,6 +62,8 @@ export default function Debug(props) {
         };
     }, []);
 
+    const hasDebuggingWebhook = useMemo(() => !!app.webhooks.find((app) => app.debug), [app]);
+
     const updateEvents = (newEvents) => {
         setEvents((previousEvents) => {
             let events = [...previousEvents, ...newEvents];
@@ -71,11 +78,26 @@ export default function Debug(props) {
         })
     }
 
+    const toggleDebuggingWebhook = () => {
+        router.post('/apps/' + app.id + '/toggle-debug', {}, {
+            onSuccess: () => setShowAddDebuggingWebhookModal(false),
+        })
+    }
+
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Debug</h2>}
+            header={(
+                <div className='flex justify-between items-center'>
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Debug</h2>
+                    {!hasDebuggingWebhook && (
+                        <button onClick={() => setShowAddDebuggingWebhookModal(true)} className='bg-indigo-500 text-white px-4 py-2 rounded-lg'>
+                            Add debugging webhook
+                        </button>
+                    )}
+                </div>
+            )}
         >
             <Head title="Debug" />
 
@@ -125,6 +147,26 @@ export default function Debug(props) {
                     </div>
                 </div>
             </div>
+
+            <Modal show={showAddDebuggingWebhookModal} onClose={setShowAddDebuggingWebhookModal}>
+                <div className="p-6">
+                    <h2 className="text-lg font-medium text-gray-900">
+                        Are you sure you want to enable the debugging webhook?
+                    </h2>
+
+                    <p className="mt-1 text-sm text-gray-600">
+                        If this is a high throughput app, this could cause performace issues
+                    </p>
+
+                    <div className="mt-6 flex justify-end">
+                        <SecondaryButton onClick={() => setShowAddDebuggingWebhookModal(false)}>Cancel</SecondaryButton>
+
+                        <PrimaryButton className="ml-3" onClick={toggleDebuggingWebhook}>
+                            Add debugging webhook
+                        </PrimaryButton>
+                    </div>
+                </div>
+            </Modal>
         </AuthenticatedLayout>
     );
 }
