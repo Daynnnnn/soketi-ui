@@ -19,7 +19,7 @@ const WebhookCard = ({ appId, webhook, onEdit }) => {
 
     return (
         <div className='relative grid gap-4 p-4 border border-gray-200 shadow-sm rounded-xl'>
-            <EditButton className="absolute right-12 top-4" onClick={onEdit} />
+            {!webhook?.debug && <EditButton className="absolute right-12 top-4" onClick={onEdit} />}
             <DeleteButton className="absolute right-4 top-4" onClick={() => setDeleteModalOpen(true)} />
             <div>
                 <p className="font-semibold text-gray-500">Type</p>
