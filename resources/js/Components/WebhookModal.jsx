@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PrimaryButton from "./PrimaryButton";
 import InputError from "./InputError";
 import InputLabel from "./InputLabel";
@@ -8,8 +8,11 @@ import TextInput from "./TextInput";
 import { useForm } from '@inertiajs/react';
 import { eventTypes } from "@/utils/eventTypes";
 import ActivePill from "./ActivePill";
+import AddButton from "./AddButton";
 
 const WebhookModal = ({ app, currentWebhookId, show, setShow }) => {
+    const [headers, setHeaders] = useState([]);
+
     const { data, setData, post, processing, errors, reset } = useForm({
         id: null,
         url: '',
@@ -27,12 +30,35 @@ const WebhookModal = ({ app, currentWebhookId, show, setShow }) => {
             id: existingWebhook.id,
             url: existingWebhook.url ?? '',
             event_types: existingWebhook.event_types ?? [],
+            headers: existingWebhook.headers ?? [],
         });
+
+        setHeaders(Object.keys(existingWebhook.headers ?? []).map((headerKey) => ({
+            key: headerKey,
+            value: existingWebhook.headers[headerKey],
+        })));
     }, [currentWebhookId]);
 
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.value);
     };
+
+    const handleHeaderChange = (index, key, value) => {
+        setHeaders((previousHeaders) => {
+            let newHeaders = previousHeaders;
+
+            newHeaders[index][key] = value;
+
+            return [...newHeaders];
+        })
+    };
+
+    useEffect(() => {
+        setData((previousData) => {
+            previousData.headers = Object.fromEntries(headers.map(({ key, value }) => [key, value]));
+            return {...previousData};
+        });
+    }, [headers])
 
     const handleSubmit = (e) => { 
         post('/apps/' + app.id + '/webhooks/save', {
@@ -85,6 +111,27 @@ const WebhookModal = ({ app, currentWebhookId, show, setShow }) => {
                                     active={data.event_types.find(type => type === eventType.key)}
                                     label={eventType.label}
                                 />
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <div className="flex items-center space-x-1">
+                            <AddButton onClick={() => setHeaders((previousHeaders) => [...previousHeaders, { key: '', value: '' }])} size={12} />
+                            <InputLabel for="headers" value="Headers" />
+                        </div>
+                        
+
+                        <div className="space-y-2">
+                            {headers.map(({ key, value }, index) => (
+                                <div className="w-full flex space-x-4">
+                                    <div className='w-1/3'>
+                                        <TextInput className="w-full" value={key} handleChange={(e) => handleHeaderChange(index, 'key', e.target.value)} />
+                                    </div>
+                                    <div className='w-2/3'>
+                                        <TextInput className="w-full" value={value} handleChange={(e) => handleHeaderChange(index, 'value', e.target.value)} />
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>
