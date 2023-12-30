@@ -40,6 +40,8 @@ const DebugCard = ({ event }) => {
 
 
 export default function Debug(props) {
+    const { app } = props;
+
     const [events, setEvents] = useState([]);
     const [showAddDebuggingWebhookModal, setShowAddDebuggingWebhookModal] = useState(false);
 
