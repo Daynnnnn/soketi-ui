@@ -20,6 +20,8 @@ use Inertia\Inertia;
 |
 */
 
+Route::webhooks('webhooks');
+
 Route::middleware(['auth', 'verified'])->prefix('apps')->name('apps.')->group(function () {
     Route::get('/', [AppsController::class, 'index'])->name('index');
     Route::prefix('{app}')->group(function () {
