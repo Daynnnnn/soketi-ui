@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppsController;
+use App\Http\Controllers\DebugController;
 use App\Http\Controllers\LimitsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebhooksController;
@@ -22,6 +23,8 @@ use Inertia\Inertia;
 Route::middleware(['auth', 'verified'])->prefix('apps')->name('apps.')->group(function () {
     Route::get('/', [AppsController::class, 'index'])->name('index');
     Route::prefix('{app}')->group(function () {
+        Route::get('debug', [DebugController::class, 'index'])->name('debug');
+
         Route::prefix('webhooks')->name('webhooks.')->group(function () {
             Route::post('save', [WebhooksController::class, 'save']);
             Route::post('delete', [WebhooksController::class, 'delete']);

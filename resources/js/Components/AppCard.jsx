@@ -87,7 +87,10 @@ export default function AppCard({ app }) {
             <div className='p-6 text-gray-900 space-y-6'>
                 <div className='flex items-center justify-between'>
                     <h2 className='text-xl font-bold'>{app.name}</h2>
-                    <div className={'w-8 h-8 rounded-full ' + (app.enabled ? 'bg-green-500 shadow-lg' : 'bg-gray-500')} />
+                    <div className='flex items-center space-x-4'>
+                        <a className='transition-colors duration-150 bg-indigo-500 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg' href={'/apps/' + app.id + '/debug'}>Debug</a>
+                        <div className={'w-8 h-8 rounded-full ' + (app.enabled ? 'bg-green-500 shadow-lg' : 'bg-gray-500')} />
+                    </div>
                 </div>
                 <div>
                     <div>
