@@ -20,6 +20,8 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('/', fn () => redirect('/login'));
+
 Route::webhooks('webhooks');
 
 Route::middleware(['auth', 'verified'])->prefix('apps')->name('apps.')->group(function () {
