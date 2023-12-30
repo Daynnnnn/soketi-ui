@@ -35,18 +35,7 @@ const DebugCard = ({ event }) => {
 
 
 export default function Debug(props) {
-    const [events, setEvents] = useState([
-        {
-            type: 'client_event',
-            channel: 'hello-world', 
-            user_id: '345435',
-            pusher_created_at: '2023-12-29 17:33:44',
-            data: {
-                hello: 'why',
-                color: 'red',
-            },
-        }
-    ]);
+    const [events, setEvents] = useState([]);
 
     useEffect(() => {
         const pusher = new Pusher('app-key', {
