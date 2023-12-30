@@ -17,16 +17,22 @@ class WebhooksController extends Controller
                     return $webhook;
                 }
 
+                $headers = collect($request->get('headers'))->filter(fn ($value, $key) => $key && $value)->all();
+
                 $webhook['url'] = $request->url;
                 $webhook['event_types'] = $request->event_types;
+                $webhook['headers'] = $headers;
 
                 return $webhook;
             });
         } else {
+            $headers = collect($request->get('headers'))->filter(fn ($value, $key) => $key && $value)->all();
+
             $app->webhooks = $app->webhooks->push([
                 'id' => Str::uuid(),
                 'url' => $request->url,
                 'event_types' => $request->event_types,
+                'headers' => $headers,
             ]);
         }
 
