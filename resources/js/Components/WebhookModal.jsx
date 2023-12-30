@@ -20,7 +20,7 @@ const WebhookModal = ({ app, currentWebhookId, show, setShow }) => {
         if (! currentWebhookId || app.webhooks.length === 0) {
             reset();
         }
-        console.log("AHHHHH")
+
         const existingWebhook = app.webhooks.find(({ id }) => id === currentWebhookId) ?? false;
 
         setData({
