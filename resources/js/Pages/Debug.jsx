@@ -58,10 +58,7 @@ export default function Debug(props) {
 
         const channel = pusher.subscribe('events_' + props.app.id);
 
-        channel.bind("App\\Notifications\\NewDebugEvents", (data) => {
-            console.log(data)
-            updateEvents(data)
-        });
+        channel.bind("App\\Notifications\\NewDebugEvents", (data) => updateEvents(data));
 
         return () => {
             pusher.disconnect();
