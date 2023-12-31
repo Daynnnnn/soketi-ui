@@ -43,6 +43,7 @@ export default function Debug(props) {
     const { app } = props;
 
     const [events, setEvents] = useState([]);
+    const [pauseEvents, setPauseEvents] = useState(false);
     const [showAddDebuggingWebhookModal, setShowAddDebuggingWebhookModal] = useState(false);
 
     useEffect(() => {
@@ -65,11 +66,15 @@ export default function Debug(props) {
         return () => {
             pusher.disconnect();
         };
-    }, []);
+    }, [pauseEvents]);
 
     const hasDebuggingWebhook = useMemo(() => !!app.webhooks.find((app) => app.debug), [app]);
 
     const updateEvents = (newEvents) => {
+        if (pauseEvents) {
+            return;
+        }
+
         setEvents((previousEvents) => {
             let events = [...previousEvents, ...newEvents];
 
@@ -110,7 +115,12 @@ export default function Debug(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className='w-full min-h-96 overflow-y-scroll'>
                         <div className="px-4 sm:px-6 lg:px-8">
-                        <div className="mt-8 flow-root">
+                        <div>
+                            <button onClick={() => setPauseEvents(!pauseEvents)} className='bg-indigo-500 text-white px-4 py-2 rounded-lg'>
+                                {pauseEvents ? 'Resume Events' : 'Pause Events'}
+                            </button>
+                        </div>
+                        <div className="mt-4 flow-root">
                             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                                 <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
