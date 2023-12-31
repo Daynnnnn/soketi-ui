@@ -7,7 +7,7 @@ type EventType = {
 export const eventTypes: EventType[] = [
     {
         key: 'client_event',
-        label: 'Client Events',
+        label: 'Client Event',
         color: 'blue-500'
     },
     {
