@@ -78,11 +78,11 @@ export default function Debug(props) {
         setEvents((previousEvents) => {
             let events = [...previousEvents, ...newEvents];
 
-            if (events.length <= 5) {
+            if (events.length <= 50) {
                 return events;
             }
 
-            events = events.splice(events.length - 5);
+            events = events.splice(events.length - 50);
 
             return events.reverse();
         })
