@@ -39,7 +39,7 @@ ADD /resources /src/resources
 ADD /jsconfig.json /src/jsconfig.json
 ADD /postcss.config.js /src/postcss.config.js
 ADD /tailwind.config.js /src/tailwind.config.js
-ADD /vite.config.js /src/vite.config.js
+ADD /vite.config.mjs /src/vite.config.mjs
 
 RUN cd /src && yarn build
 
