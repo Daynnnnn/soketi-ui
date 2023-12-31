@@ -2,7 +2,7 @@
 
 namespace App\SignatureValidator;
 
-use Spatie\WebhookClient\SignatureValidator;
+use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\Exceptions\InvalidConfig;
 use Spatie\WebhookClient\WebhookConfig;

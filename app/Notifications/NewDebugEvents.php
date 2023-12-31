@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Notifications;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -37,7 +37,7 @@ class NewDebugEvents implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('events:' . $this->appId);
+        return new Channel('events_' . $this->appId);
     }
 
     /**

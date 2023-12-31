@@ -27,7 +27,7 @@ const DebugCard = ({ event }) => {
         <>
             <div key={event.email} className='grid grid-cols-4 cursor-pointer items-center' onClick={() => setActive((previous) => !previous)}>
                 <div className="whitespace-nowrap px-3 py-4 text-sm w-32">
-                    <ActivePill key={event.type} active={true} label={getEventType(event.type).label} />
+                    <ActivePill key={event.event} active={true} label={getEventType(event.event)?.label} />
                 </div>
                 <p className="whitespace-nowrap px-3 py-4 text-sm">{event.channel}</p>
                 <p className="whitespace-nowrap px-3 py-4 text-sm">{event.user_id}</p>
@@ -55,9 +55,12 @@ export default function Debug(props) {
             enabledTransports: ['ws', 'wss'],
         });
 
-        const channel = pusher.subscribe('events:' + props.app.id);
+        const channel = pusher.subscribe('events_' + props.app.id);
 
-        channel.bind("App\\Events\\NewDebugEvents", (data) => updateEvents(data));
+        channel.bind("App\\Notifications\\NewDebugEvents", (data) => {
+            console.log(data)
+            updateEvents(data)
+        });
 
         return () => {
             pusher.disconnect();
@@ -128,7 +131,7 @@ export default function Debug(props) {
                                     </div>
                                     {events.length ? (
                                         <div className="divide-y divide-gray-200 bg-white">
-                                            {events.map((event) => <DebugCard key={event.uuid} event={event} />)}
+                                            {events.map((event) => <DebugCard key={event.debug_uuid} event={event} />)}
                                         </div>
                                     ) : (
                                         <div className='py-4 flex flex-col w-full'>
