@@ -64,7 +64,7 @@ const WebhookModal = ({ app, currentWebhookId, show, setShow }) => {
         e.preventDefault();
 
         post('/apps/' + app.id + '/webhooks/save', {
-            // onSuccess: () => setShow(false),
+            onSuccess: () => setShow(false),
         })
     }
 
