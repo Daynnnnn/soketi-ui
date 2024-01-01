@@ -61,6 +61,8 @@ const WebhookModal = ({ app, currentWebhookId, show, setShow }) => {
     }, [headers])
 
     const handleSubmit = (e) => { 
+        e.preventDefault();
+
         post('/apps/' + app.id + '/webhooks/save', {
             // onSuccess: () => setShow(false),
         })

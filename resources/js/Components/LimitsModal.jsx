@@ -16,6 +16,8 @@ const LimitsModal = ({ app, show, setShow, limitItems }) => {
     };
 
     const handleSubmit = (e) => {
+        e.preventDefault();
+
         post('/apps/' + app.id + '/limits', {
             onSuccess: () => setShow(false),
         })
