@@ -132,7 +132,7 @@ export default function AppCard({ app }) {
                         <h3 className='pl-1 text-lg font-bold'>Limits</h3>
                     </div>
                     <div className='pt-2 grid grid-cols-2 md:grid-cols-3 gap-4'>
-                        {limitItems.map(limitItem => <LabelledCard key={limitItem.key} label={limitItem.label} value={! app[limitItem.key] ? '∞' : app[limitItem.key]} />)}
+                        {limitItems.map(limitItem => <LabelledCard key={limitItem.key} label={limitItem.label} value={(! app[limitItem.key] || app[limitItem.key] === -1) ? '∞' : app[limitItem.key]} />)}
                     </div>
                     <LimitsModal app={app} limitItems={limitItems} show={limitsModalOpen} setShow={setLimitsModalOpen} />
                 </div>
