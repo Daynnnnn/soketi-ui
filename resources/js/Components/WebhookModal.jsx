@@ -20,11 +20,11 @@ const WebhookModal = ({ app, currentWebhookId, show, setShow }) => {
     });
 
     useEffect(() => {
-        if (! currentWebhookId || app.webhooks.length === 0) {
+        if (! currentWebhookId || app.webhooks?.length === 0) {
             reset();
         }
 
-        const existingWebhook = app.webhooks.find(({ id }) => id === currentWebhookId) ?? false;
+        const existingWebhook = app.webhooks?.find(({ id }) => id === currentWebhookId) ?? false;
 
         setData({
             id: existingWebhook.id,

@@ -11,6 +11,10 @@ class WebhooksController extends Controller
 {
     public function save(Request $request, App $app)
     {
+        if (! $app->webhooks) {
+            $app->webhooks = collect();
+        }
+
         if ($request->id !== null) {
             $app->webhooks = $app->webhooks->map(function ($webhook) use ($request) {
                 if (! isset($webhook['id']) || $request->id !== $webhook['id']) {
@@ -48,6 +52,10 @@ class WebhooksController extends Controller
 
     public function toggleDebuggingWebhook(Request $request, App $app)
     {
+        if (! $app->webhooks) {
+            $app->webhooks = collect();
+        }
+
         $debuggingWebhook = $app->webhooks->firstWhere(fn ($webhook) => $webhook['debug'] ?? false);
 
         if (! $debuggingWebhook) {
