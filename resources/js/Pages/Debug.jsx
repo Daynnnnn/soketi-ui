@@ -65,7 +65,7 @@ export default function Debug(props) {
         };
     }, [pauseEvents]);
 
-    const hasDebuggingWebhook = useMemo(() => !!app.webhooks.find((app) => app.debug), [app]);
+    const hasDebuggingWebhook = useMemo(() => !!app.webhooks?.find((app) => app.debug), [app]);
 
     const updateEvents = (newEvents) => {
         if (pauseEvents) {
