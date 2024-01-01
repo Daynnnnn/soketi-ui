@@ -17,6 +17,7 @@ export default function Apps(props) {
             name: newAppName,
         });
 
+        setShowAddAppModal(false);
         setNewAppName('');
     };
 

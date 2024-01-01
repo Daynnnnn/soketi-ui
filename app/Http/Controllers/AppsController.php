@@ -31,8 +31,6 @@ class AppsController extends Controller
             'max_client_events_per_sec' => -1,
             'max_read_req_per_sec' => -1,
         ]);
-
-        return $this->index();
     }
 
     public function refreshCredentials(App $app)
