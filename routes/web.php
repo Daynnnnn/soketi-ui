@@ -26,6 +26,8 @@ Route::webhooks('webhooks');
 
 Route::middleware(['auth', 'verified'])->prefix('apps')->name('apps.')->group(function () {
     Route::get('/', [AppsController::class, 'index'])->name('index');
+    Route::post('/create', [AppsController::class, 'create'])->name('create');
+
     Route::prefix('{app}')->group(function () {
         Route::get('debug', [DebugController::class, 'index'])->name('debug');
         Route::post('toggle-debug', [WebhooksController::class, 'toggleDebuggingWebhook'])->name('toggle-debug');
