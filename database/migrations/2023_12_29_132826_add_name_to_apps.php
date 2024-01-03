@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,10 +12,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('apps', function (Blueprint $table) {
-            $table->after('secret', function ($table) {
-                $table->string('name')->nullable();
-            });
+        Schema::create('apps', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->string('secret')->nullable();
+            $table->timestamps();
         });
     }
 
