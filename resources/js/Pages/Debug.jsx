@@ -25,12 +25,12 @@ const DebugCard = ({ event }) => {
 
     return (
         <>
-            <div key={event.email} className='grid grid-cols-4 cursor-pointer items-center' onClick={() => setActive((previous) => !previous)}>
-                <div className="whitespace-nowrap px-3 py-4 text-sm w-32">
+            <div key={event.email} className='grid grid-cols-5 cursor-pointer items-center' onClick={() => setActive((previous) => !previous)}>
+                <div className="whitespace-nowrap px-3 py-4 text-sm col-span-1">
                     <ActivePill key={event.name} active={true} label={getEventType(event.name)?.label} />
                 </div>
-                <p className="whitespace-nowrap px-3 py-4 text-sm">{event.channel}</p>
-                <p className="whitespace-nowrap px-3 py-4 text-sm">{event.pusher_created_at}</p>
+                <p className="whitespace-nowrap px-3 py-4 text-sm col-span-3">{event.channel}</p>
+                <p className="whitespace-nowrap px-3 py-4 text-sm col-span-1">{event.pusher_created_at}</p>
             </div>
             {active && <EventInfo event={event} />}
         </>
