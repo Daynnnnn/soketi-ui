@@ -21,7 +21,6 @@ RUN cd /src && composer install --no-dev --no-scripts
 FROM node:18 as modules
 
 ADD /package.json /src/package.json
-ADD /package-lock.json /src/package-lock.json
 ADD /yarn.lock /src/yarn.lock
 
 RUN cd /src && yarn
@@ -29,7 +28,6 @@ RUN cd /src && yarn
 FROM node:18 as build
 
 ADD /package.json /src/package.json
-ADD /package-lock.json /src/package-lock.json
 ADD /yarn.lock /src/yarn.lock
 
 COPY --from=modules /src/node_modules /src/node_modules
