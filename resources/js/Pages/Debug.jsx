@@ -27,7 +27,7 @@ const DebugCard = ({ event }) => {
         <>
             <div key={event.email} className='grid grid-cols-4 cursor-pointer items-center' onClick={() => setActive((previous) => !previous)}>
                 <div className="whitespace-nowrap px-3 py-4 text-sm w-32">
-                    <ActivePill key={event.event} active={true} label={getEventType(event.event)?.label} />
+                    <ActivePill key={event.name} active={true} label={getEventType(event.name)?.label} />
                 </div>
                 <p className="whitespace-nowrap px-3 py-4 text-sm">{event.channel}</p>
                 <p className="whitespace-nowrap px-3 py-4 text-sm">{event.user_id}</p>
