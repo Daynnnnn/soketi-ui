@@ -30,7 +30,6 @@ const DebugCard = ({ event }) => {
                     <ActivePill key={event.name} active={true} label={getEventType(event.name)?.label} />
                 </div>
                 <p className="whitespace-nowrap px-3 py-4 text-sm">{event.channel}</p>
-                <p className="whitespace-nowrap px-3 py-4 text-sm">{event.user_id}</p>
                 <p className="whitespace-nowrap px-3 py-4 text-sm">{event.pusher_created_at}</p>
             </div>
             {active && <EventInfo event={event} />}
@@ -129,9 +128,6 @@ export default function Debug(props) {
                                         </div>
                                         <div className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                             Channel
-                                        </div>
-                                        <div className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                            User ID
                                         </div>
                                         <div className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                             Created At
