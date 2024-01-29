@@ -122,14 +122,14 @@ export default function Debug(props) {
                             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                                 <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                                 <div className="min-w-full divide-y divide-gray-300">
-                                    <div className="grid grid-cols-4 bg-gray-50">
-                                        <div className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                    <div className="grid grid-cols-5 bg-gray-50">
+                                        <div className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 col-span-1">
                                             Event Type
                                         </div>
-                                        <div className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        <div className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 col-span-3">
                                             Channel
                                         </div>
-                                        <div className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        <div className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 col-span-1">
                                             Created At
                                         </div>
                                     </div>
