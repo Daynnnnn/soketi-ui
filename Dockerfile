@@ -43,6 +43,8 @@ RUN cd /src && yarn build
 
 FROM jkaninda/nginx-php-fpm:8.2
 
+ADD /site.conf /var/www/html/conf/nginx/nginx-site.conf
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
