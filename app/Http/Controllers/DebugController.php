@@ -12,6 +12,13 @@ class DebugController extends Controller
     {
         return Inertia::render('Debug', [
             'app' => $app,
+            'pusherConfig' => [
+                'appKey' => env('PUSHER_APP_KEY'),
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'host' => env('PUSHER_HOST'),
+                'port' => env('PUSHER_PORT'),
+                'forceTLS' => env('PUSHER_SCHEME') === 'https',
+            ],
         ]);
     }
 }

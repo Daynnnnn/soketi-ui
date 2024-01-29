@@ -40,18 +40,19 @@ const DebugCard = ({ event }) => {
 
 
 export default function Debug(props) {
-    const { app } = props;
+    const { app, pusherConfig } = props;
 
     const [events, setEvents] = useState([]);
     const [pauseEvents, setPauseEvents] = useState(false);
     const [showAddDebuggingWebhookModal, setShowAddDebuggingWebhookModal] = useState(false);
 
     useEffect(() => {
-        const pusher = new Pusher('app-key', {
-            cluster: 'eu',
-            wsHost: '127.0.0.1',
-            wsPort: 6001,
-            forceTLS: false,
+        const pusher = new Pusher(pusherConfig.appKey, {
+            cluster: pusherConfig.cluster,
+            wsHost: pusherConfig.host,
+            wsPort: pusherConfig.port,
+            wssPort: pusherConfig.port,
+            forceTLS: pusherConfig.forceTLS,
             encrypted: true,
             enabledTransports: ['ws', 'wss'],
         });
