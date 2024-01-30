@@ -11,6 +11,10 @@ class SoketiSignatureValidator implements SignatureValidator
 {
     public function isValid(Request $request, WebhookConfig $config): bool
     {
+        if (env('DISABLE_SIGNATURE_VALIDATION', false)) {
+            return true;
+        }
+
         $appId = $request->header('x-app-id');
 
         if ($appId == null) {
