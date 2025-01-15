@@ -1,0 +1,12 @@
+.git/**/*
+assets/**/*
+benchmark/**/*
+build/**/*
+coverage/**/*
+dist/**/*
+node_modules/**/*
+tests/**/*
+.env
+npm-debug.log
+yarn.lock
+*.db

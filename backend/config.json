@@ -1,0 +1,24 @@
+{
+    "debug": true,
+    "port": 6001,
+    "appManager.array.apps": [
+        {
+            "id": "app-id",
+            "key": "app-key",
+            "secret": "app-secret",
+            "authHost": "http://localhost:8080/authhost/",
+            "authEndpoint": "/broadcasting/auth",
+            "enable_statistics": true,
+            "webhooks": [
+                {
+                    "url": "http://localhost:8080/webhooks/events/",
+                    "event_types": ["channel_occupied","channel_vacated","subscription_count", "client_event","member_added","member_removed"],
+                    "filter": {
+        "channel_name_starts_with": "",
+        "channel_name_ends_with": ""
+    }
+                }
+            ]
+        }
+    ]
+}

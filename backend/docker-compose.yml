@@ -1,0 +1,106 @@
+# version: "3"
+
+# networks:
+#   soketi:
+#     driver: bridge
+
+# services:
+#   localstack:
+#     container_name: localstack
+#     image: localstack/localstack
+#     ports:
+#       - "4510-4530:4510-4530"
+#       - "4566:4566"
+#       - "4571:4571"
+#     environment:
+#       - SERVICES=sqs,s3
+#       - DEBUG=1
+#       - HOST_TMP_FOLDER=/tmp/localstack
+#       - DOCKER_HOST=unix:///var/run/docker.sock
+#     volumes:
+#       - "${TMPDIR:-/tmp}/localstack:/tmp/localstack"
+#       - "/var/run/docker.sock:/var/run/docker.sock"
+#     networks:
+#       - soketi
+#     healthcheck:
+#       test: ["CMD", "curl", "-f", "http://localhost:4566/health"]
+#       retries: 3
+#       timeout: 5s
+#   soketi:
+#     image: soketi-reborn:distrolessv4
+#     ports:
+#       - 6001:6001
+#       - 9601:9601
+#     environment:
+#       - SOKETI_DEBUG='-1'
+#       - DEFAULT_APP_ID=''
+#       - DEFAULT_APP_KEY=''
+#       - DEFAULT_APP_SECRET=''
+#       - PUSHER_HOST='127.0.0.1'
+#       - PUSHER_PORT= '6001'
+#       - PUSHER_SCHEME='http'
+#       - METRICS_SERVER_PORT=9601
+#       - DEFAULT_APP_ENABLE_CLIENT_MESSAGES=false
+#       - METRICS_ENABLED= 1
+#       - SOKETI_CACHE_DRIVER=memory
+#       - HOME=/app/
+#     volumes:
+#       - ./config.json:/app/config.json
+#     command: ["/app/bin/server.js", "start", "--config=/app/config.json"]
+#     restart: unless-stopped
+#     networks:
+#       - soketi    
+#   initialize_sqs:
+#     container_name: initialize_sqs
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.awslocal
+#     volumes:
+#       - ./tests/fixtures/sqs.json:/tmp/sqs.json
+#     networks:
+#       - soketi
+#     command:
+#       - sqs
+#       - create-queue
+#       - --endpoint-url=http://localstack:4566
+#       - --queue-name=test.fifo
+#       - --region=us-east-1
+#       - --attributes=file:///tmp/sqs.json
+#     depends_on:
+#       localstack:
+#         condition: service_healthy
+#   dynamodb:
+#     container_name: dynamodb
+#     image: amazon/dynamodb-local
+#     ports:
+#       - "8000:8000"
+#     command: "-jar DynamoDBLocal.jar -sharedDb"
+#     networks:
+#       - soketi
+#     environment:
+#       AWS_ACCESS_KEY_ID: fake-id
+#       AWS_SECRET_ACCESS_KEY: fake-secret
+#   initialize_dynamodb:
+#     container_name: initialize_dynamodb
+#     image: node:18-alpine
+#     volumes:
+#       - .:/app/
+#     networks:
+#       - soketi
+#     environment:
+#       - DYNAMODB_URL="dynamodb:8000"
+#     entrypoint:
+#       - node
+#       - /app/tests/fixtures/dynamodb_schema.js
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
